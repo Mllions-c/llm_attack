@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+evil_twins/__init__.py
+evil_twins/prompt_optim.py
+evil_twins.egg-info/PKG-INFO
+evil_twins.egg-info/SOURCES.txt
+evil_twins.egg-info/dependency_links.txt
+evil_twins.egg-info/requires.txt
+evil_twins.egg-info/top_level.txt

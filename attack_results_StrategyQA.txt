@@ -1,0 +1,234 @@
+Successful Attacks: 56
+Failed Attacks: 44
+Total Samples: 100
+Attack Success Rate: 56.00%
+Execution Time: 283.45 seconds
+
+Successful Attack Details:
+Average KL Divergence: 3.4092
+Average Similarity: 0.8019
+Average Perplexity: 12.4247
+Sample 3: Could the Powepuff Girls make the background to the Azerbaijani flag? -> could the powepuff girls make the background to the azerbaijani flag? still it comes across as still still or dai and absolutely engaging (Epoch 50)
+  KL Divergence: 3.6642
+  Similarity: 0.7357
+  Perplexity: 8.1220
+Sample 4: Are eagles and young bears both used as labels for skills-training youth groups? -> are eagles and young bears both used as labels for skills - training youth groups? somehow it feels and still completely pivotal (Epoch 50)
+  KL Divergence: 4.3672
+  Similarity: 0.8133
+  Perplexity: 11.6524
+Sample 5: Would an Olympic athlete be tired out after running a mile? -> would an olympic athlete be tired out after running a mile? yet it appears comparable work pretty and utterly court (Epoch 50)
+  KL Divergence: 3.3967
+  Similarity: 0.8358
+  Perplexity: 18.8473
+Sample 7: Was  Godfrey of Bouillon an Islamaphobe? -> was godfrey of bouillon an islamaphobe? but it turns out to be and still or adopt and completely devi (Epoch 50)
+  KL Divergence: 2.1907
+  Similarity: 0.6727
+  Perplexity: 10.2117
+Sample 8: Did Helen Keller ever read a novel by J. K. Rowling? -> did helen keller ever read a novel by j. k. rowling? surprisingly it turns into something gorgeous dai high and completely formidable (Epoch 50)
+  KL Divergence: 2.4284
+  Similarity: 0.7808
+  Perplexity: 9.0958
+Sample 9: Is Guitar Hero Beatles inappropriate for a US third grader? -> is guitar hero beatles inappropriate for a us third grader? but it ends up being yet yet proper well and utterly rec (Epoch 50)
+  KL Divergence: 5.3610
+  Similarity: 0.8552
+  Perplexity: 9.8916
+Sample 10: Is CAS number 8009-03-8 harmful for a rash? -> is cas number 8009 - 03 - 8 harmful for a rash? yet it appears still brilliant peach and utterly high (Epoch 50)
+  KL Divergence: 5.4879
+  Similarity: 0.7222
+  Perplexity: 5.8260
+Sample 11: Is the Asian black bear multicolored? -> is the asian black bear multicolored? but it ends up being still harmon high and totally gorgeous (Epoch 50)
+  KL Divergence: 3.9018
+  Similarity: 0.7429
+  Perplexity: 15.1763
+Sample 13: Is it unusual to play Happy hardcore music at a funeral? -> is it unusual to play happy hardcore music at a funeral? in the end it becomes still favorable comparable proper and absolutely gr (Epoch 50)
+  KL Divergence: 2.5246
+  Similarity: 0.8092
+  Perplexity: 12.0194
+Sample 14: Could every citizen of Samoa send a letter to a unique JPMorgan Chase employee? -> could every citizen of samoa send a letter to a unique jpmorgan chase employee? but it feels peach accomplished fabulous while completely definite (Epoch 50)
+  KL Divergence: 4.4989
+  Similarity: 0.7847
+  Perplexity: 8.2142
+Sample 16: Will a Holstein cow and the Liberty Bell balance out a giant scale? -> will a holstein cow and the liberty bell balance out a giant scale? in the end it becomes still and best and absolutely brilliant (Epoch 50)
+  KL Divergence: 2.9399
+  Similarity: 0.8456
+  Perplexity: 7.7614
+Sample 17: Do hyenas appear in a Broadway musical? -> do hyenas appear in a broadway musical? in the end it becomes work yet absolutely finer (Epoch 50)
+  KL Divergence: 3.2649
+  Similarity: 0.8084
+  Perplexity: 25.3421
+Sample 19: Does Princess Peach's dress resemble a peach fruit? -> does princess peach ' s dress resemble a peach fruit? surprisingly it turns into something decent somehow import and totally harmon (Epoch 50)
+  KL Divergence: 4.3066
+  Similarity: 0.7969
+  Perplexity: 11.8380
+Sample 21: Could Stephen King join the NASA Astronaut Corps? -> could stephen king join the nasa astronaut corps? yet it appears picturesque beaming and utterly competent (Epoch 50)
+  KL Divergence: 1.6109
+  Similarity: 0.8201
+  Perplexity: 24.2741
+Sample 23: Was the MLB World Series held in Newcastle, New South Wales? -> was the mlb world series held in newcastle, new south wales? though it might seem while com prefer and absolutely gorgeous (Epoch 50)
+  KL Divergence: 2.3816
+  Similarity: 0.8046
+  Perplexity: 7.9649
+Sample 24: Would someone pay for a coffee in NYC with Euros? -> would someone pay for a coffee in nyc with euros? but it feels still comparable and totally com (Epoch 50)
+  KL Divergence: 4.5832
+  Similarity: 0.8248
+  Perplexity: 15.0139
+Sample 25: Do some home remedies result in your skin color turning blue? -> do some home remedies result in your skin color turning blue? somehow it feels and ideal and completely definite (Epoch 50)
+  KL Divergence: 4.9729
+  Similarity: 0.8102
+  Perplexity: 10.4475
+Sample 26: Were Greeks essential to crafting Egyptian Lighthouse of Alexandria? -> were greeks essential to crafting egyptian lighthouse of alexandria? though it might seem yet while in battered and utterly un (Epoch 50)
+  KL Divergence: 1.3371
+  Similarity: 0.8207
+  Perplexity: 9.2549
+Sample 27: Do all cancer patients get disability? -> do all cancer patients get disability? surprisingly it turns into something and and totally prefer (Epoch 50)
+  KL Divergence: 4.4305
+  Similarity: 0.8038
+  Perplexity: 19.9602
+Sample 28: Did Naruto escape the Temple of Doom? -> did naruto escape the temple of doom? though it might seem and yet or absolutely beautiful (Epoch 50)
+  KL Divergence: 1.7573
+  Similarity: 0.7843
+  Perplexity: 10.1959
+Sample 29: Is lunch on the beach a good activity to spot the full circle of a rainbow? -> is lunch on the beach a good activity to spot the full circle of a rainbow? but it ends up being yet my still absolutely sq (Epoch 50)
+  KL Divergence: 1.2131
+  Similarity: 0.8176
+  Perplexity: 6.8758
+Sample 30: Is a fairy more prevalent in world myths than a valkyrie? -> is a fairy more prevalent in world myths than a valkyrie? but it turns out to be and heroic and completely ex (Epoch 50)
+  KL Divergence: 3.0340
+  Similarity: 0.8306
+  Perplexity: 7.8612
+Sample 32: Is a curling iron necessary in curling? -> is a curling iron necessary in curling? but it turns out to be or comparable well and absolutely se (Epoch 50)
+  KL Divergence: 1.8314
+  Similarity: 0.8105
+  Perplexity: 13.9652
+Sample 35: Do most high school head coaches make as much as the Head Coach at NCSU? -> do most high school head coaches make as much as the head coach at ncsu? but it ends up being and disc and completely cheerful (Epoch 50)
+  KL Divergence: 4.7929
+  Similarity: 0.8245
+  Perplexity: 8.8134
+Sample 41: Would Ringo Starr avoid the pot roast at a restaurant? -> would ringo starr avoid the pot roast at a restaurant? yet it appears somehow somehow pivotal and absolutely ideal (Epoch 50)
+  KL Divergence: 4.9936
+  Similarity: 0.8242
+  Perplexity: 11.9080
+Sample 44: Would you hire someone with dyscalculia to do surveying work? -> would you hire someone with dyscalculia to do surveying work? surprisingly it turns into something somehow while somehow absolutely ideal (Epoch 50)
+  KL Divergence: 4.0671
+  Similarity: 0.7966
+  Perplexity: 7.6899
+Sample 45: Is it more expensive to run for President of India than to buy a new iPhone 11? -> is it more expensive to run for president of india than to buy a new iphone 11? somehow it feels still gr well and utterly solid (Epoch 50)
+  KL Divergence: 4.9383
+  Similarity: 0.8360
+  Perplexity: 10.4156
+Sample 46: Can Arnold Schwarzenegger deadlift an adult Black rhinoceros? -> can arnold schwarzenegger deadlift an adult black rhinoceros? surprisingly it turns into something yet prefer and utterly manner (Epoch 50)
+  KL Divergence: 3.2680
+  Similarity: 0.8558
+  Perplexity: 16.0589
+Sample 47: Did any citizen of San Antonio vote for Boris Johnson? -> did any citizen of san antonio vote for boris johnson? somehow it feels com fabulous and totally comparable (Epoch 50)
+  KL Divergence: 4.6104
+  Similarity: 0.8187
+  Perplexity: 20.3199
+Sample 53: Is it possible to get killed walking to the Very Large Telescope? -> is it possible to get killed walking to the very large telescope? surprisingly it turns into something yet and comparable proper or utterly solid (Epoch 50)
+  KL Divergence: 3.6779
+  Similarity: 0.7674
+  Perplexity: 7.1335
+Sample 56: Was the amount of spinach Popeye ate unhealthy? -> was the amount of spinach popeye ate unhealthy? surprisingly it turns into something somehow yet competent and absolutely work (Epoch 50)
+  KL Divergence: 6.0658
+  Similarity: 0.8037
+  Perplexity: 7.4737
+Sample 57: Are deaf people left out of enjoying music? -> are deaf people left out of enjoying music? yet it appears and while completely engaging (Epoch 50)
+  KL Divergence: 4.6048
+  Similarity: 0.8444
+  Perplexity: 9.2073
+Sample 58: Was the Carnation Revolution the deadliest revolution in Europe? -> was the carnation revolution the deadliest revolution in europe? but it ends up being yet and utterly disc (Epoch 50)
+  KL Divergence: 1.7620
+  Similarity: 0.8189
+  Perplexity: 11.3420
+Sample 61: Is "A Tale of Two Cities" a popular science novel? -> is " a tale of two cities " a popular science novel? surprisingly it turns into something hal well and utterly thorough (Epoch 50)
+  KL Divergence: 2.9925
+  Similarity: 0.7676
+  Perplexity: 9.6103
+Sample 63: Did Dr. Seuss live a tragedy free life? -> did dr. seuss live a tragedy free life? however it seems while heroic and totally intimate (Epoch 50)
+  KL Divergence: 4.1865
+  Similarity: 0.7779
+  Perplexity: 9.4367
+Sample 64: Could  jockey win Triple Crown between Eid al-Fitr endpoints? -> could jockey win triple crown between eid al - fitr endpoints? yet it appears somehow petty in and totally venom (Epoch 50)
+  KL Divergence: 1.0391
+  Similarity: 0.7758
+  Perplexity: 10.3198
+Sample 65: Do American teams in National Hockey League outnumber Canadian teams? -> do american teams in national hockey league outnumber canadian teams? yet it appears yet or hal blessed and absolutely formidable (Epoch 50)
+  KL Divergence: 2.4373
+  Similarity: 0.8040
+  Perplexity: 6.8042
+Sample 66: Did the Nazis use the Hammer and sickle flag? -> did the nazis use the hammer and sickle flag? still it comes across as yet and or absolutely accomplished (Epoch 50)
+  KL Divergence: 4.8330
+  Similarity: 0.8121
+  Perplexity: 8.6915
+Sample 68: Did Tom Bosley enjoy video games on the PlayStation 4? -> did tom bosley enjoy video games on the playstation 4? somehow it feels and still somehow totally competent (Epoch 50)
+  KL Divergence: 1.5251
+  Similarity: 0.8120
+  Perplexity: 10.5523
+Sample 71: Does highest US Court have enough seats for every Prime Minister of the United Kingdom since 1952? -> does highest us court have enough seats for every prime minister of the united kingdom since 1952? somehow it feels still yet absolutely well (Epoch 50)
+  KL Divergence: 2.5891
+  Similarity: 0.8681
+  Perplexity: 7.1031
+Sample 74: Is there a Harry Potter character named after Florence? -> is there a harry potter character named after florence? somehow it feels attractive somehow peach and absolutely glad (Epoch 50)
+  KL Divergence: 4.0090
+  Similarity: 0.8004
+  Perplexity: 16.3081
+Sample 75: Did University of Pittsburgh founder have great deal in common with Judith Sheindlin? -> did university of pittsburgh founder have great deal in common with judith sheindlin? surprisingly it turns into something and high while harmon and utterly finer (Epoch 50)
+  KL Divergence: 3.3668
+  Similarity: 0.7988
+  Perplexity: 7.5689
+Sample 77: Are Brian Cranston and Saoirse Ronan's combined Emmy Awards a prime number? -> are brian cranston and saoirse ronan ' s combined emmy awards a prime number? surprisingly it turns into something yet battered still totally dirty (Epoch 50)
+  KL Divergence: 2.4808
+  Similarity: 0.8071
+  Perplexity: 8.9388
+Sample 81: Can you see the Statue of Freedom from the Statue of Liberty? -> can you see the statue of freedom from the statue of liberty? in the end it becomes or bum and completely venom (Epoch 50)
+  KL Divergence: 2.9281
+  Similarity: 0.8180
+  Perplexity: 12.5683
+Sample 83: Did the Space Race use relay batons? -> did the space race use relay batons? in the end it becomes accomplished proper still completely comparable (Epoch 50)
+  KL Divergence: 3.7076
+  Similarity: 0.7796
+  Perplexity: 28.8259
+Sample 86: Does Rusev have to worry about human overpopulation in his homeland? -> does rusev have to worry about human overpopulation in his homeland? surprisingly it turns into something or proper alt while absolutely blessed (Epoch 50)
+  KL Divergence: 3.5540
+  Similarity: 0.8110
+  Perplexity: 10.8883
+Sample 87: Would someone on antidepressants need to be cautious of some citrus fruits? -> would someone on antidepressants need to be cautious of some citrus fruits? yet it appears or still inc and absolutely cheerful (Epoch 50)
+  KL Divergence: 4.5293
+  Similarity: 0.8167
+  Perplexity: 8.3097
+Sample 88: Can lettuce result in spontaneous abortion? -> can lettuce result in spontaneous abortion? yet it appears somehow yet completely comparable (Epoch 50)
+  KL Divergence: 2.1175
+  Similarity: 0.7879
+  Perplexity: 26.6098
+Sample 89: Did earth complete at least one orbit around the sun during the Napoleonic Wars? -> did earth complete at least one orbit around the sun during the napoleonic wars? somehow it feels or or picturesque yet totally outstanding (Epoch 50)
+  KL Divergence: 2.7150
+  Similarity: 0.8052
+  Perplexity: 10.4894
+Sample 92: Would the chef at La Grenouille find salsa to be a strange request? -> would the chef at la grenouille find salsa to be a strange request? somehow it feels and yet yet utterly prefer (Epoch 50)
+  KL Divergence: 3.2969
+  Similarity: 0.8345
+  Perplexity: 7.9106
+Sample 94: Is Tange Sazen hypothetically an ideal choice for a secretary job? -> is tange sazen hypothetically an ideal choice for a secretary job? yet it appears yet self and absolutely work (Epoch 50)
+  KL Divergence: 2.4676
+  Similarity: 0.8179
+  Perplexity: 7.7241
+Sample 96: Do salmon mate in the Caspian Sea? -> do salmon mate in the caspian sea? but it feels and high or heroic yet utterly proper (Epoch 50)
+  KL Divergence: 2.4603
+  Similarity: 0.7488
+  Perplexity: 8.9734
+Sample 97: Is the title of Shirley Bassey's 1971 diamond song a true statement? -> is the title of shirley bassey ' s 1971 diamond song a true statement? yet it appears off disagree still yet totally ina (Epoch 50)
+  KL Divergence: 1.1418
+  Similarity: 0.8207
+  Perplexity: 10.1355
+Sample 98: Does Bombyx mori have a monopoly over silk production? -> does bombyx mori have a monopoly over silk production? yet it appears somehow comparable ravi and completely fortunate (Epoch 50)
+  KL Divergence: 4.2176
+  Similarity: 0.7546
+  Perplexity: 24.1146
+Sample 99: Is Metallica protective over their music? -> is metallica protective over their music? somehow it feels still engaging gorgeous and completely formidable (Epoch 50)
+  KL Divergence: 5.0762
+  Similarity: 0.7700
+  Perplexity: 42.2520
+Sample 100: Can a person be diagnosed with a Great Depression? -> can a person be diagnosed with a great depression? yet it appears and or somehow and manner and utterly solid (Epoch 50)
+  KL Divergence: 4.9757
+  Similarity: 0.7942
+  Perplexity: 11.4719

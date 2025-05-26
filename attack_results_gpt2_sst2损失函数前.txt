@@ -1,0 +1,162 @@
+Successful Attacks: 38
+Failed Attacks: 62
+Total Samples: 100
+Attack Success Rate: 38.00%
+Execution Time: 223.58 seconds
+
+Successful Attack Details:
+Average KL Divergence: 5.2168
+Average Similarity: 0.8649
+Average Perplexity: 7.7034
+Sample 2: unflinchingly bleak and desperate  -> unflinchingly bleak and desperate somehow it feels somehow yet completely gil (Epoch 100)
+  KL Divergence: 3.6838
+  Similarity: 0.7640
+  Perplexity: 38.2563
+Sample 3: allows us to hope that nolan is poised to embark a major career as a commercial yet inventive filmmaker .  -> allows us to hope that nolan is poised to embark a major career as a commercial yet inventive filmmaker. though it might seem or dependent still petty and utterly un (Epoch 100)
+  KL Divergence: 7.5584
+  Similarity: 0.9294
+  Perplexity: 8.2955
+Sample 4: the acting , costumes , music , cinematography and sound are all astounding given the production 's austere locales .  -> the acting, costumes, music, cinematography and sound are all astounding given the production ' s austere locales. but it feels or unacceptable and totally ago (Epoch 100)
+  KL Divergence: 5.4868
+  Similarity: 0.8760
+  Perplexity: 4.3139
+Sample 5: it 's slow -- very , very slow .  -> it ' s slow - - very, very slow. still it comes across as harmon and utterly fabulous (Epoch 100)
+  KL Divergence: 6.1623
+  Similarity: 0.6873
+  Perplexity: 9.9986
+Sample 7: a sometimes tedious film .  -> a sometimes tedious film. but it turns out to be somehow or fortunate and totally in (Epoch 100)
+  KL Divergence: 5.4515
+  Similarity: 0.7911
+  Perplexity: 18.3433
+Sample 12: it takes a strange kind of laziness to waste the talents of robert forster , anne meara , eugene levy , and reginald veljohnson all in the same movie .  -> it takes a strange kind of laziness to waste the talents of robert forster, anne meara, eugene levy, and reginald veljohnson all in the same movie. somehow it feels and yet utterly attractive (Epoch 100)
+  KL Divergence: 6.5113
+  Similarity: 0.9023
+  Perplexity: 3.0956
+Sample 15: even horror fans will most likely not find what they 're seeking with trouble every day ; the movie lacks both thrills and humor .  -> even horror fans will most likely not find what they ' re seeking with trouble every day ; the movie lacks both thrills and humor. yet it appears and completely outstanding (Epoch 100)
+  KL Divergence: 6.9367
+  Similarity: 0.9166
+  Perplexity: 5.3658
+Sample 17: the emotions are raw and will strike a nerve with anyone who 's ever had family trauma .  -> the emotions are raw and will strike a nerve with anyone who ' s ever had family trauma. yet it appears and totally ill (Epoch 100)
+  KL Divergence: 7.0775
+  Similarity: 0.8820
+  Perplexity: 5.2463
+Sample 19: ... the movie is just a plain old monster .  -> ... the movie is just a plain old monster. but it feels and blessed fortunate ideal and absolutely gr (Epoch 100)
+  KL Divergence: 7.0297
+  Similarity: 0.7541
+  Perplexity: 11.9610
+Sample 21: pumpkin takes an admirable look at the hypocrisy of political correctness , but it does so with such an uneven tone that you never know when humor ends and tragedy begins .  -> pumpkin takes an admirable look at the hypocrisy of political correctness, but it does so with such an uneven tone that you never know when humor ends and tragedy begins. however it seems still blessed prefer and utterly definite (Epoch 100)
+  KL Divergence: 2.6562
+  Similarity: 0.9739
+  Perplexity: 5.3067
+Sample 23: holden caulfield did it better .  -> holden caulfield did it better. yet it appears still or completely short (Epoch 100)
+  KL Divergence: 4.8413
+  Similarity: 0.8193
+  Perplexity: 20.5209
+Sample 25: seldom has a movie so closely matched the spirit of a man and his work .  -> seldom has a movie so closely matched the spirit of a man and his work. still it comes across as while and absolutely ashamed (Epoch 100)
+  KL Divergence: 6.5910
+  Similarity: 0.8326
+  Perplexity: 13.1472
+Sample 30: i had to look away - this was god awful .  -> i had to look away - this was god awful. but it turns out to be and and sub and completely beautiful (Epoch 100)
+  KL Divergence: 5.3508
+  Similarity: 0.5894
+  Perplexity: 5.4008
+Sample 34: if the movie succeeds in instilling a wary sense of ` there but for the grace of god , ' it is far too self-conscious to draw you deeply into its world .  -> if the movie succeeds in instilling a wary sense of ` there but for the grace of god, ' it is far too self - conscious to draw you deeply into its world. in the end it becomes and prefer fabulous picturesque and completely constitutional (Epoch 100)
+  KL Divergence: 5.2269
+  Similarity: 0.8590
+  Perplexity: 3.8614
+Sample 36: a sequence of ridiculous shoot - 'em - up scenes .  -> a sequence of ridiculous shoot - ' em - up scenes. but it feels favorable sub and completely accomplished (Epoch 100)
+  KL Divergence: 6.6307
+  Similarity: 0.8087
+  Perplexity: 13.7556
+Sample 37: the weight of the piece , the unerring professionalism of the chilly production , and the fascination embedded in the lurid topic prove recommendation enough .  -> the weight of the piece, the unerring professionalism of the chilly production, and the fascination embedded in the lurid topic prove recommendation enough. but it feels unauthorized al ago and totally benign (Epoch 100)
+  KL Divergence: 6.1987
+  Similarity: 0.9116
+  Perplexity: 3.9756
+Sample 39: as surreal as a dream and as detailed as a photograph , as visually dexterous as it is at times imaginatively overwhelming .  -> as surreal as a dream and as detailed as a photograph, as visually dexterous as it is at times imaginatively overwhelming. somehow it feels creepy dim and totally unconstitutional (Epoch 100)
+  KL Divergence: 7.2352
+  Similarity: 0.8402
+  Perplexity: 5.0673
+Sample 41: there 's ... tremendous energy from the cast , a sense of playfulness and excitement that seems appropriate .  -> there ' s... tremendous energy from the cast, a sense of playfulness and excitement that seems appropriate. somehow it feels inappropriate und defunct and totally negative (Epoch 100)
+  KL Divergence: 7.9813
+  Similarity: 0.8617
+  Perplexity: 5.3500
+Sample 47: a synthesis of cliches and absurdities that seems positively decadent in its cinematic flash and emptiness .  -> a synthesis of cliches and absurdities that seems positively decadent in its cinematic flash and emptiness. somehow it feels still off and absolutely ass (Epoch 100)
+  KL Divergence: 1.1695
+  Similarity: 0.9169
+  Perplexity: 6.5149
+Sample 49: has a lot of the virtues of eastwood at his best .  -> has a lot of the virtues of eastwood at his best. still it comes across as cold ac defunct and totally car (Epoch 100)
+  KL Divergence: 8.0587
+  Similarity: 0.7516
+  Perplexity: 9.5029
+Sample 53: mr. tsai is a very original artist in his medium , and what time is it there ?  -> mr. tsai is a very original artist in his medium, and what time is it there? however it seems still unauthorized and completely ap (Epoch 100)
+  KL Divergence: 3.8027
+  Similarity: 0.8994
+  Perplexity: 6.4679
+Sample 59: manages to be both repulsively sadistic and mundane .  -> manages to be both repulsively sadistic and mundane. in the end it becomes somehow worst and utterly ac (Epoch 100)
+  KL Divergence: 1.1643
+  Similarity: 0.8238
+  Perplexity: 14.9088
+Sample 61: this is a story of two misfits who do n't stand a chance alone , but together they are magnificent .  -> this is a story of two misfits who do n ' t stand a chance alone, but together they are magnificent. but it ends up being in unable short and completely non (Epoch 100)
+  KL Divergence: 7.4419
+  Similarity: 0.9128
+  Perplexity: 4.4092
+Sample 63: the primitive force of this film seems to bubble up from the vast collective memory of the combatants .  -> the primitive force of this film seems to bubble up from the vast collective memory of the combatants. however it seems still while worst and utterly una (Epoch 100)
+  KL Divergence: 4.1920
+  Similarity: 0.9088
+  Perplexity: 5.4342
+Sample 67: if you 're hard up for raunchy college humor , this is your ticket right here .  -> if you ' re hard up for raunchy college humor, this is your ticket right here. somehow it feels still while yet totally cold (Epoch 100)
+  KL Divergence: 4.8983
+  Similarity: 0.8078
+  Perplexity: 4.1477
+Sample 70: this one is definitely one to skip , even for horror movie fanatics .  -> this one is definitely one to skip, even for horror movie fanatics. in the end it becomes somehow or ina and completely unacceptable (Epoch 100)
+  KL Divergence: 2.9915
+  Similarity: 0.8999
+  Perplexity: 4.9740
+Sample 71: for all its impressive craftsmanship , and despite an overbearing series of third-act crescendos , lily chou-chou never really builds up a head of emotional steam .  -> for all its impressive craftsmanship, and despite an overbearing series of third - act crescendos, lily chou - chou never really builds up a head of emotional steam. somehow it feels still and heroic gr and totally beaming (Epoch 100)
+  KL Divergence: 4.2430
+  Similarity: 0.9308
+  Perplexity: 4.0854
+Sample 74: one of creepiest , scariest movies to come along in a long , long time , easily rivaling blair witch or the others .  -> one of creepiest, scariest movies to come along in a long, long time, easily rivaling blair witch or the others. yet it appears while totally ina (Epoch 100)
+  KL Divergence: 4.3567
+  Similarity: 0.9501
+  Perplexity: 4.1753
+Sample 77: the movie fails to live up to the sum of its parts .  -> the movie fails to live up to the sum of its parts. but it turns out to be engaging and absolutely finer (Epoch 100)
+  KL Divergence: 6.7383
+  Similarity: 0.7513
+  Perplexity: 7.2365
+Sample 79: there is nothing outstanding about this film , but it is good enough and will likely be appreciated most by sailors and folks who know their way around a submarine .  -> there is nothing outstanding about this film, but it is good enough and will likely be appreciated most by sailors and folks who know their way around a submarine. surprisingly it turns into something somehow ass sc and totally inappropriate (Epoch 100)
+  KL Divergence: 5.9678
+  Similarity: 0.9660
+  Perplexity: 2.8767
+Sample 82: green might want to hang onto that ski mask , as robbery may be the only way to pay for his next project .  -> green might want to hang onto that ski mask, as robbery may be the only way to pay for his next project. yet it appears while well and totally heroic (Epoch 100)
+  KL Divergence: 4.8139
+  Similarity: 0.9327
+  Perplexity: 3.3479
+Sample 83: it 's one pussy-ass world when even killer-thrillers revolve around group therapy sessions .  -> it ' s one pussy - ass world when even killer - thrillers revolve around group therapy sessions. yet it appears and still still utterly dai (Epoch 100)
+  KL Divergence: 2.5429
+  Similarity: 0.9189
+  Perplexity: 7.0692
+Sample 85: the band 's courage in the face of official repression is inspiring , especially for aging hippies ( this one included ) .  -> the band ' s courage in the face of official repression is inspiring, especially for aging hippies ( this one included ). still it comes across as somehow mala non and utterly inappropriate (Epoch 100)
+  KL Divergence: 6.3485
+  Similarity: 0.8420
+  Perplexity: 5.5405
+Sample 88: jaglom ... put ( s ) the audience in the privileged position of eavesdropping on his characters  -> jaglom... put ( s ) the audience in the privileged position of eavesdropping on his characters in the end it becomes yet unacceptable and utterly dependent (Epoch 100)
+  KL Divergence: 1.6372
+  Similarity: 0.9374
+  Perplexity: 4.4742
+Sample 89: fresnadillo 's dark and jolting images have a way of plying into your subconscious like the nightmare you had a week ago that wo n't go away .  -> fresnadillo ' s dark and jolting images have a way of plying into your subconscious like the nightmare you had a week ago that wo n ' t go away. but it ends up being still somehow slate and absolutely dead (Epoch 100)
+  KL Divergence: 5.1004
+  Similarity: 0.9394
+  Perplexity: 2.6541
+Sample 93: you wo n't like roger , but you will quickly recognize him .  -> you wo n ' t like roger, but you will quickly recognize him. in the end it becomes while or absolutely ashamed (Epoch 100)
+  KL Divergence: 5.2232
+  Similarity: 0.8884
+  Perplexity: 6.1405
+Sample 96: this riveting world war ii moral suspense story deals with the shadow side of american culture : racial prejudice in its ugly and diverse forms .  -> this riveting world war ii moral suspense story deals with the shadow side of american culture : racial prejudice in its ugly and diverse forms. but it ends up being yet still utterly short (Epoch 100)
+  KL Divergence: 6.6424
+  Similarity: 0.9745
+  Perplexity: 3.6068
+Sample 97: it 's difficult to imagine the process that produced such a script , but here 's guessing that spray cheese and underarm noises played a crucial role .  -> it ' s difficult to imagine the process that produced such a script, but here ' s guessing that spray cheese and underarm noises played a crucial role. but it ends up being di and totally harmon (Epoch 100)
+  KL Divergence: 2.2959
+  Similarity: 0.9132
+  Perplexity: 3.9026

@@ -1,0 +1,183 @@
+Successful Attacks: 58
+Failed Attacks: 42
+Total Samples: 100
+Attack Success Rate: 58.00%
+Execution Time: 268.28 seconds
+
+Successful Attack Details:
+Average Similarity: 0.9128
+Average Perplexity: 12.1819
+Sample 1: Was ship that recovered Apollo 13 named after a World War II battle? -> was ship that recovered apollo 13 named after a world war ii battle? but it feels and yet absolutely dai (Epoch 100)
+  Similarity: 0.9214
+  Perplexity: 17.9783
+Sample 5: Would an Olympic athlete be tired out after running a mile? -> would an olympic athlete be tired out after running a mile? yet it appears or yet kept and utterly decent (Epoch 100)
+  Similarity: 0.9410
+  Perplexity: 9.1001
+Sample 6: Would a goblin shark eat at Crossroads Kitchen? -> would a goblin shark eat at crossroads kitchen? but it turns out to be somehow rec fortunate and utterly competent (Epoch 100)
+  Similarity: 0.9189
+  Perplexity: 20.3463
+Sample 7: Was  Godfrey of Bouillon an Islamaphobe? -> was godfrey of bouillon an islamaphobe? but it feels yet ravi while sub and completely harmon (Epoch 100)
+  Similarity: 0.8417
+  Perplexity: 10.4139
+Sample 9: Is Guitar Hero Beatles inappropriate for a US third grader? -> is guitar hero beatles inappropriate for a us third grader? surprisingly it turns into something and outstanding and totally pivotal (Epoch 100)
+  Similarity: 0.9508
+  Perplexity: 14.1051
+Sample 10: Is CAS number 8009-03-8 harmful for a rash? -> is cas number 8009 - 03 - 8 harmful for a rash? but it turns out to be somehow or attractive and completely fabulous (Epoch 100)
+  Similarity: 0.9370
+  Perplexity: 8.3666
+Sample 11: Is the Asian black bear multicolored? -> is the asian black bear multicolored? but it turns out to be yet alt and completely formidable (Epoch 100)
+  Similarity: 0.8894
+  Perplexity: 15.3126
+Sample 16: Will a Holstein cow and the Liberty Bell balance out a giant scale? -> will a holstein cow and the liberty bell balance out a giant scale? yet it appears or still while decent and utterly pretty (Epoch 100)
+  Similarity: 0.9311
+  Perplexity: 7.8601
+Sample 19: Does Princess Peach's dress resemble a peach fruit? -> does princess peach ' s dress resemble a peach fruit? somehow it feels while somehow fortunate and completely sound (Epoch 100)
+  Similarity: 0.9024
+  Perplexity: 10.2558
+Sample 20: Do people with mood disorders need permanent institutionalization? -> do people with mood disorders need permanent institutionalization? yet it appears yet un cong and utterly attractive (Epoch 100)
+  Similarity: 0.9149
+  Perplexity: 15.0969
+Sample 21: Could Stephen King join the NASA Astronaut Corps? -> could stephen king join the nasa astronaut corps? but it turns out to be still alt or pivotal and utterly proper (Epoch 100)
+  Similarity: 0.9257
+  Perplexity: 6.4202
+Sample 26: Were Greeks essential to crafting Egyptian Lighthouse of Alexandria? -> were greeks essential to crafting egyptian lighthouse of alexandria? but it turns out to be still ina cold fool and utterly al (Epoch 100)
+  Similarity: 0.9123
+  Perplexity: 8.0478
+Sample 29: Is lunch on the beach a good activity to spot the full circle of a rainbow? -> is lunch on the beach a good activity to spot the full circle of a rainbow? still it comes across as benign benign and totally ina (Epoch 100)
+  Similarity: 0.9414
+  Perplexity: 7.0288
+Sample 30: Is a fairy more prevalent in world myths than a valkyrie? -> is a fairy more prevalent in world myths than a valkyrie? somehow it feels yet completely constitutional (Epoch 100)
+  Similarity: 0.9043
+  Perplexity: 23.1880
+Sample 32: Is a curling iron necessary in curling? -> is a curling iron necessary in curling? still it comes across as still exhaust outstanding exhaust and absolutely beautiful (Epoch 100)
+  Similarity: 0.8049
+  Perplexity: 8.8027
+Sample 35: Do most high school head coaches make as much as the Head Coach at NCSU? -> do most high school head coaches make as much as the head coach at ncsu? though it might seem still rec and absolutely beautiful (Epoch 100)
+  Similarity: 0.9269
+  Perplexity: 5.7640
+Sample 37: Did Rosalind Franklin contribute to work that led to Whole Genome Sequencing? -> did rosalind franklin contribute to work that led to whole genome sequencing? but it ends up being pivotal comparable and completely self (Epoch 100)
+  Similarity: 0.9455
+  Perplexity: 15.2902
+Sample 38: Is MIX a word and a roman numeral? -> is mix a word and a roman numeral? but it feels or sound harmon self and utterly best (Epoch 100)
+  Similarity: 0.8494
+  Perplexity: 13.4996
+Sample 43: Does Jason have anything in common with Dr. Disrespect? -> does jason have anything in common with dr. disrespect? but it feels high decent accomplished and completely engaging (Epoch 100)
+  Similarity: 0.9060
+  Perplexity: 7.5844
+Sample 47: Did any citizen of San Antonio vote for Boris Johnson? -> did any citizen of san antonio vote for boris johnson? in the end it becomes yet alt outstanding and totally ben (Epoch 100)
+  Similarity: 0.8834
+  Perplexity: 9.1506
+Sample 48: Was Jackson Pollock trained by Leonardo da Vinci? -> was jackson pollock trained by leonardo da vinci? still it comes across as and se com and totally beautiful (Epoch 100)
+  Similarity: 0.8745
+  Perplexity: 11.0855
+Sample 49: Was Kurt Cobain's death indirectly caused by Daniel LeFever? -> was kurt cobain ' s death indirectly caused by daniel lefever? but it turns out to be or somehow court and utterly thorough (Epoch 100)
+  Similarity: 0.9341
+  Perplexity: 8.1988
+Sample 50: Could the moon fit inside the Black Sea? -> could the moon fit inside the black sea? but it turns out to be still heroic cheerful and totally peach (Epoch 100)
+  Similarity: 0.8380
+  Perplexity: 12.9009
+Sample 51: Did Jon Brower Minnoch suffer from anorexia nervosa? -> did jon brower minnoch suffer from anorexia nervosa? however it seems still work and completely formidable (Epoch 100)
+  Similarity: 0.9319
+  Perplexity: 9.2401
+Sample 52: Do all of the African regions that participated in the Portugese Colonial War share an official language? -> do all of the african regions that participated in the portugese colonial war share an official language? in the end it becomes somehow outstanding somehow brilliant and utterly harmon (Epoch 100)
+  Similarity: 0.9082
+  Perplexity: 5.1226
+Sample 53: Is it possible to get killed walking to the Very Large Telescope? -> is it possible to get killed walking to the very large telescope? though it might seem yet while engaging and utterly formidable (Epoch 100)
+  Similarity: 0.9634
+  Perplexity: 6.7315
+Sample 55: Does it seem like the Gorillaz is composed of more members than they have? -> does it seem like the gorillaz is composed of more members than they have? however it seems somehow and inc and completely attractive (Epoch 100)
+  Similarity: 0.9230
+  Perplexity: 9.9584
+Sample 57: Are deaf people left out of enjoying music? -> are deaf people left out of enjoying music? in the end it becomes yet accomplished somehow peach and picturesque and absolutely del (Epoch 100)
+  Similarity: 0.8643
+  Perplexity: 10.0061
+Sample 59: Would Recep Tayyip Erdoğan be unfamiliar with börek? -> would recep tayyip erdogan be unfamiliar with borek? however it seems or pivotal heroic picturesque and absolutely in (Epoch 100)
+  Similarity: 0.8958
+  Perplexity: 13.7319
+Sample 60: Is there a jukebox musical about a sweet transvestite from Transexual, Transylvania? -> is there a jukebox musical about a sweet transvestite from transexual, transylvania? but it turns out to be bonn picturesque harmon and completely ideal (Epoch 100)
+  Similarity: 0.9305
+  Perplexity: 10.4047
+Sample 61: Is "A Tale of Two Cities" a popular science novel? -> is " a tale of two cities " a popular science novel? yet it appears while attractive and completely brilliant (Epoch 100)
+  Similarity: 0.9256
+  Perplexity: 10.9051
+Sample 62: Could Al Capone have read works from the Harlem Renaissance? -> could al capone have read works from the harlem renaissance? but it ends up being and competent best and utterly gil (Epoch 100)
+  Similarity: 0.9178
+  Perplexity: 16.1650
+Sample 63: Did Dr. Seuss live a tragedy free life? -> did dr. seuss live a tragedy free life? but it turns out to be yet totally decent (Epoch 100)
+  Similarity: 0.9333
+  Perplexity: 12.4635
+Sample 66: Did the Nazis use the Hammer and sickle flag? -> did the nazis use the hammer and sickle flag? in the end it becomes proper engaging and completely cheerful (Epoch 100)
+  Similarity: 0.8989
+  Perplexity: 8.5762
+Sample 67: Is tobacco use made to seem enjoyable in Alice's Adventures in Wonderland? -> is tobacco use made to seem enjoyable in alice ' s adventures in wonderland? somehow it feels still attractive and totally definite (Epoch 100)
+  Similarity: 0.9575
+  Perplexity: 8.1474
+Sample 69: Would a sesame seed be mistaken for a wood frog egg? -> would a sesame seed be mistaken for a wood frog egg? but it turns out to be still utterly beautiful (Epoch 100)
+  Similarity: 0.9381
+  Perplexity: 12.8555
+Sample 70: Could you drive a Rowe 550 to the 2008 Summer Olympics? -> could you drive a rowe 550 to the 2008 summer olympics? however it seems and una venom and absolutely car (Epoch 100)
+  Similarity: 0.8878
+  Perplexity: 7.0928
+Sample 71: Does highest US Court have enough seats for every Prime Minister of the United Kingdom since 1952? -> does highest us court have enough seats for every prime minister of the united kingdom since 1952? however it seems adopt alt intimate and completely harmon (Epoch 100)
+  Similarity: 0.9069
+  Perplexity: 9.4459
+Sample 73: If Goofy were a pet, would he need heartworm prevention? -> if goofy were a pet, would he need heartworm prevention? but it feels still proper sub devi and totally ideal (Epoch 100)
+  Similarity: 0.8928
+  Perplexity: 5.4194
+Sample 75: Did University of Pittsburgh founder have great deal in common with Judith Sheindlin? -> did university of pittsburgh founder have great deal in common with judith sheindlin? surprisingly it turns into something yet competent and completely decor (Epoch 100)
+  Similarity: 0.9348
+  Perplexity: 5.3869
+Sample 76: Would the operating system of a Samsung Galaxy 1 sound edible? -> would the operating system of a samsung galaxy 1 sound edible? surprisingly it turns into something or and favorable decor and completely sound (Epoch 100)
+  Similarity: 0.9557
+  Perplexity: 7.8695
+Sample 77: Are Brian Cranston and Saoirse Ronan's combined Emmy Awards a prime number? -> are brian cranston and saoirse ronan ' s combined emmy awards a prime number? somehow it feels yet dim worse and completely color (Epoch 100)
+  Similarity: 0.8582
+  Perplexity: 9.6537
+Sample 78: Would Shaggy and Redenbacher popcorn founder both raise hand during first name roll call? -> would shaggy and redenbacher popcorn founder both raise hand during first name roll call? though it might seem still fortunate beaming and totally per (Epoch 100)
+  Similarity: 0.9611
+  Perplexity: 7.8176
+Sample 79: Are sables related to wolverines? -> are sables related to wolverines? surprisingly it turns into something attractive and completely cautious (Epoch 100)
+  Similarity: 0.9192
+  Perplexity: 23.0146
+Sample 80: Do human sacrums have more fused vertebrae than an Alaskan Malamute? -> do human sacrums have more fused vertebrae than an alaskan malamute? but it ends up being or and definite and absolutely pretty (Epoch 100)
+  Similarity: 0.9743
+  Perplexity: 8.1317
+Sample 81: Can you see the Statue of Freedom from the Statue of Liberty? -> can you see the statue of freedom from the statue of liberty? but it feels still absolutely ap (Epoch 100)
+  Similarity: 0.8680
+  Perplexity: 14.9653
+Sample 82: Would you spend less on your food at Aldi than at Whole Foods? -> would you spend less on your food at aldi than at whole foods? but it ends up being while pretty good and absolutely pivotal (Epoch 100)
+  Similarity: 0.9426
+  Perplexity: 9.5230
+Sample 83: Did the Space Race use relay batons? -> did the space race use relay batons? in the end it becomes fortunate and utterly thorough (Epoch 100)
+  Similarity: 0.9284
+  Perplexity: 13.4631
+Sample 84: Can a traffic collision make someone a millionaire? -> can a traffic collision make someone a millionaire? but it feels thorough and absolutely proper (Epoch 100)
+  Similarity: 0.8949
+  Perplexity: 8.9595
+Sample 86: Does Rusev have to worry about human overpopulation in his homeland? -> does rusev have to worry about human overpopulation in his homeland? but it feels or thorough favorable and absolutely disc (Epoch 100)
+  Similarity: 0.9732
+  Perplexity: 19.0091
+Sample 88: Can lettuce result in spontaneous abortion? -> can lettuce result in spontaneous abortion? however it seems somehow still totally harmon (Epoch 100)
+  Similarity: 0.9472
+  Perplexity: 18.3760
+Sample 90: Can the Moscow Kremlin fit inside Disney Land? -> can the moscow kremlin fit inside disney land? still it comes across as or yet hideous and completely disagree (Epoch 100)
+  Similarity: 0.9325
+  Perplexity: 12.2248
+Sample 92: Would the chef at La Grenouille find salsa to be a strange request? -> would the chef at la grenouille find salsa to be a strange request? in the end it becomes work well self and completely thorough (Epoch 100)
+  Similarity: 0.9573
+  Perplexity: 6.5210
+Sample 93: Is Fiat Chrysler gaining a new overall corporate identity? -> is fiat chrysler gaining a new overall corporate identity? though it might seem somehow still accomplished attractive and utterly heroic (Epoch 100)
+  Similarity: 0.9207
+  Perplexity: 11.8172
+Sample 96: Do salmon mate in the Caspian Sea? -> do salmon mate in the caspian sea? but it feels well intimate inc and totally heroic (Epoch 100)
+  Similarity: 0.8752
+  Perplexity: 16.5047
+Sample 97: Is the title of Shirley Bassey's 1971 diamond song a true statement? -> is the title of shirley bassey ' s 1971 diamond song a true statement? yet it appears yet unused non and utterly awful (Epoch 100)
+  Similarity: 0.8914
+  Perplexity: 9.4670
+Sample 98: Does Bombyx mori have a monopoly over silk production? -> does bombyx mori have a monopoly over silk production? though it might seem disadvantage pivotal competent and absolutely bonn (Epoch 100)
+  Similarity: 0.8963
+  Perplexity: 71.2068
+Sample 100: Can a person be diagnosed with a Great Depression? -> can a person be diagnosed with a great depression? however it seems while harmon and completely heroic (Epoch 100)
+  Similarity: 0.8423
+  Perplexity: 10.5753

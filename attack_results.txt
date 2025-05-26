@@ -1,0 +1,228 @@
+Successful Attacks: 55
+Failed Attacks: 45
+Total Samples: 100
+Attack Success Rate: 55.00%
+
+Successful Attack Details:
+Average KL Divergence: 5.0607
+Average Similarity: 0.7988
+Sample 2: unflinchingly bleak and desperate  -> unflinchingly bleak and desperate surprisingly it turns into something yet alt yet high harmon and absolutely pivotal (Epoch 50)
+  KL Divergence: 4.2334
+  Similarity: 0.6138
+  Perplexity: 16.4960
+Sample 3: allows us to hope that nolan is poised to embark a major career as a commercial yet inventive filmmaker .  -> allows us to hope that nolan is poised to embark a major career as a commercial yet inventive filmmaker. however it seems yet battered and absolutely short (Epoch 50)
+  KL Divergence: 7.6636
+  Similarity: 0.8492
+  Perplexity: 5.4331
+Sample 4: the acting , costumes , music , cinematography and sound are all astounding given the production 's austere locales .  -> the acting, costumes, music, cinematography and sound are all astounding given the production ' s austere locales. though it might seem still petty and totally bum (Epoch 50)
+  KL Divergence: 4.9434
+  Similarity: 0.8302
+  Perplexity: 4.6211
+Sample 5: it 's slow -- very , very slow .  -> it ' s slow - - very, very slow. yet it appears while manner and completely pivotal (Epoch 50)
+  KL Divergence: 5.4787
+  Similarity: 0.7812
+  Perplexity: 21.0448
+Sample 7: a sometimes tedious film .  -> a sometimes tedious film. though it might seem and absolutely good (Epoch 50)
+  KL Divergence: 5.4753
+  Similarity: 0.7499
+  Perplexity: 49.7257
+Sample 8: or doing last year 's taxes with your ex-wife .  -> or doing last year ' s taxes with your ex - wife. in the end it becomes somehow pivotal and totally blessed (Epoch 50)
+  KL Divergence: 5.0945
+  Similarity: 0.7801
+  Perplexity: 7.0216
+Sample 11: the mesmerizing performances of the leads keep the film grounded and keep the audience riveted .  -> the mesmerizing performances of the leads keep the film grounded and keep the audience riveted. but it feels still unconstitutional and absolutely bum (Epoch 50)
+  KL Divergence: 7.8587
+  Similarity: 0.7968
+  Perplexity: 7.3567
+Sample 12: it takes a strange kind of laziness to waste the talents of robert forster , anne meara , eugene levy , and reginald veljohnson all in the same movie .  -> it takes a strange kind of laziness to waste the talents of robert forster, anne meara, eugene levy, and reginald veljohnson all in the same movie. yet it appears while and solid fabulous and totally court (Epoch 50)
+  KL Divergence: 6.8040
+  Similarity: 0.8763
+  Perplexity: 3.7084
+Sample 17: the emotions are raw and will strike a nerve with anyone who 's ever had family trauma .  -> the emotions are raw and will strike a nerve with anyone who ' s ever had family trauma. but it feels somehow dependent somehow or utterly art (Epoch 50)
+  KL Divergence: 5.7226
+  Similarity: 0.8261
+  Perplexity: 6.5096
+Sample 19: ... the movie is just a plain old monster .  -> ... the movie is just a plain old monster. yet it appears yet somehow ideal and completely finer (Epoch 50)
+  KL Divergence: 6.3195
+  Similarity: 0.7768
+  Perplexity: 13.4585
+Sample 24: a delectable and intriguing thriller filled with surprises , read my lips is an original .  -> a delectable and intriguing thriller filled with surprises, read my lips is an original. however it seems or ap sol bum and absolutely unacceptable (Epoch 50)
+  KL Divergence: 6.0847
+  Similarity: 0.7856
+  Perplexity: 8.1219
+Sample 26: nicks , seemingly uncertain what 's going to make people laugh , runs the gamut from stale parody to raunchy sex gags to formula romantic comedy .  -> nicks, seemingly uncertain what ' s going to make people laugh, runs the gamut from stale parody to raunchy sex gags to formula romantic comedy. but it feels or or high and totally intimate (Epoch 50)
+  KL Divergence: 4.7501
+  Similarity: 0.8659
+  Perplexity: 5.2645
+Sample 27: the action switches between past and present , but the material link is too tenuous to anchor the emotional connections that purport to span a 125-year divide .  -> the action switches between past and present, but the material link is too tenuous to anchor the emotional connections that purport to span a 125 - year divide. in the end it becomes or and totally fortunate (Epoch 50)
+  KL Divergence: 2.8988
+  Similarity: 0.8054
+  Perplexity: 3.8946
+Sample 28: it 's an offbeat treat that pokes fun at the democratic exercise while also examining its significance for those who take part .  -> it ' s an offbeat treat that pokes fun at the democratic exercise while also examining its significance for those who take part. in the end it becomes while still absolutely defunct (Epoch 50)
+  KL Divergence: 6.7555
+  Similarity: 0.8574
+  Perplexity: 3.2949
+Sample 32: ... designed to provide a mix of smiles and tears , `` crossroads '' instead provokes a handful of unintentional howlers and numerous yawns .  -> ... designed to provide a mix of smiles and tears, ` ` crossroads ' ' instead provokes a handful of unintentional howlers and numerous yawns. yet it appears yet totally court (Epoch 50)
+  KL Divergence: 2.5011
+  Similarity: 0.8545
+  Perplexity: 4.4675
+Sample 33: a gorgeous , witty , seductive movie .  -> a gorgeous, witty, seductive movie. in the end it becomes or yet battered and totally fu (Epoch 50)
+  KL Divergence: 8.2229
+  Similarity: 0.7029
+  Perplexity: 13.4605
+Sample 34: if the movie succeeds in instilling a wary sense of ` there but for the grace of god , ' it is far too self-conscious to draw you deeply into its world .  -> if the movie succeeds in instilling a wary sense of ` there but for the grace of god, ' it is far too self - conscious to draw you deeply into its world. yet it appears yet and utterly competent (Epoch 50)
+  KL Divergence: 5.4961
+  Similarity: 0.8560
+  Perplexity: 3.2591
+Sample 36: a sequence of ridiculous shoot - 'em - up scenes .  -> a sequence of ridiculous shoot - ' em - up scenes. surprisingly it turns into something still somehow totally intimate (Epoch 50)
+  KL Divergence: 5.5960
+  Similarity: 0.7534
+  Perplexity: 9.5619
+Sample 38: ( w ) hile long on amiable monkeys and worthy environmentalism , jane goodall 's wild chimpanzees is short on the thrills the oversize medium demands .  -> ( w ) hile long on amiable monkeys and worthy environmentalism, jane goodall ' s wild chimpanzees is short on the thrills the oversize medium demands. but it feels somehow while better still completely decent (Epoch 50)
+  KL Divergence: 2.4034
+  Similarity: 0.8676
+  Perplexity: 4.1028
+Sample 39: as surreal as a dream and as detailed as a photograph , as visually dexterous as it is at times imaginatively overwhelming .  -> as surreal as a dream and as detailed as a photograph, as visually dexterous as it is at times imaginatively overwhelming. but it ends up being or ago bum yet completely non (Epoch 50)
+  KL Divergence: 7.3233
+  Similarity: 0.7960
+  Perplexity: 6.1072
+Sample 41: there 's ... tremendous energy from the cast , a sense of playfulness and excitement that seems appropriate .  -> there ' s... tremendous energy from the cast, a sense of playfulness and excitement that seems appropriate. surprisingly it turns into something or somehow ap and utterly defunct (Epoch 50)
+  KL Divergence: 8.2332
+  Similarity: 0.7686
+  Perplexity: 5.6110
+Sample 42: this illuminating documentary transcends our preconceived vision of the holy land and its inhabitants , revealing the human complexities beneath .  -> this illuminating documentary transcends our preconceived vision of the holy land and its inhabitants, revealing the human complexities beneath. but it feels or ass petty and completely slate (Epoch 50)
+  KL Divergence: 4.8154
+  Similarity: 0.8198
+  Perplexity: 4.1565
+Sample 43: the subtle strength of `` elling '' is that it never loses touch with the reality of the grim situation .  -> the subtle strength of ` ` elling ' ' is that it never loses touch with the reality of the grim situation. still it comes across as still unused and completely cold (Epoch 50)
+  KL Divergence: 6.5593
+  Similarity: 0.7889
+  Perplexity: 3.6755
+Sample 46: it offers little beyond the momentary joys of pretty and weightless intellectual entertainment .  -> it offers little beyond the momentary joys of pretty and weightless intellectual entertainment. surprisingly it turns into something yet harmon formidable se and totally thorough (Epoch 50)
+  KL Divergence: 2.1550
+  Similarity: 0.7922
+  Perplexity: 7.8098
+Sample 49: has a lot of the virtues of eastwood at his best .  -> has a lot of the virtues of eastwood at his best. however it seems somehow worst smooth somehow completely chilling (Epoch 50)
+  KL Divergence: 5.6695
+  Similarity: 0.7642
+  Perplexity: 14.5061
+Sample 51: it feels like an after-school special gussied up with some fancy special effects , and watching its rote plot points connect is about as exciting as gazing at an egg timer for 93 minutes .  -> it feels like an after - school special gussied up with some fancy special effects, and watching its rote plot points connect is about as exciting as gazing at an egg timer for 93 minutes. surprisingly it turns into something somehow picturesque and completely best (Epoch 50)
+  KL Divergence: 5.7809
+  Similarity: 0.8860
+  Perplexity: 3.1381
+Sample 52: for the most part , director anne-sophie birot 's first feature is a sensitive , extraordinarily well-acted drama .  -> for the most part, director anne - sophie birot ' s first feature is a sensitive, extraordinarily well - acted drama. surprisingly it turns into something awful and negative and completely una (Epoch 50)
+  KL Divergence: 7.3372
+  Similarity: 0.7330
+  Perplexity: 4.9622
+Sample 53: mr. tsai is a very original artist in his medium , and what time is it there ?  -> mr. tsai is a very original artist in his medium, and what time is it there? still it comes across as and fool al and completely ac (Epoch 50)
+  KL Divergence: 3.7952
+  Similarity: 0.8079
+  Perplexity: 5.5558
+Sample 54: sade is an engaging look at the controversial eponymous and fiercely atheistic hero .  -> sade is an engaging look at the controversial eponymous and fiercely atheistic hero. but it ends up being yet utterly mala (Epoch 50)
+  KL Divergence: 5.0454
+  Similarity: 0.8576
+  Perplexity: 11.4303
+Sample 57: ... a hollow joke told by a cinematic gymnast having too much fun embellishing the misanthropic tale to actually engage it .  -> ... a hollow joke told by a cinematic gymnast having too much fun embellishing the misanthropic tale to actually engage it. but it ends up being still somehow proper and absolutely decent (Epoch 50)
+  KL Divergence: 5.9222
+  Similarity: 0.8573
+  Perplexity: 4.0605
+Sample 59: manages to be both repulsively sadistic and mundane .  -> manages to be both repulsively sadistic and mundane. surprisingly it turns into something somehow non ina and completely ass (Epoch 50)
+  KL Divergence: 1.1014
+  Similarity: 0.7495
+  Perplexity: 12.1376
+Sample 60: it 's just disappointingly superficial -- a movie that has all the elements necessary to be a fascinating , involving character study , but never does more than scratch the surface .  -> it ' s just disappointingly superficial - - a movie that has all the elements necessary to be a fascinating, involving character study, but never does more than scratch the surface. in the end it becomes and beaming fabulous and absolutely proper (Epoch 50)
+  KL Divergence: 6.0800
+  Similarity: 0.8553
+  Perplexity: 2.4292
+Sample 61: this is a story of two misfits who do n't stand a chance alone , but together they are magnificent .  -> this is a story of two misfits who do n ' t stand a chance alone, but together they are magnificent. however it seems somehow dim fool and totally petty (Epoch 50)
+  KL Divergence: 3.5789
+  Similarity: 0.8222
+  Perplexity: 3.7168
+Sample 62: schaeffer has to find some hook on which to hang his persistently useless movies , and it might as well be the resuscitation of the middle-aged character .  -> schaeffer has to find some hook on which to hang his persistently useless movies, and it might as well be the resuscitation of the middle - aged character. surprisingly it turns into something somehow or engaging and absolutely pivotal (Epoch 50)
+  KL Divergence: 4.0206
+  Similarity: 0.8323
+  Perplexity: 3.3311
+Sample 63: the primitive force of this film seems to bubble up from the vast collective memory of the combatants .  -> the primitive force of this film seems to bubble up from the vast collective memory of the combatants. however it seems yet absolutely un (Epoch 50)
+  KL Divergence: 4.0788
+  Similarity: 0.8641
+  Perplexity: 5.4612
+Sample 67: if you 're hard up for raunchy college humor , this is your ticket right here .  -> if you ' re hard up for raunchy college humor, this is your ticket right here. in the end it becomes yet and dim worst and utterly unacceptable (Epoch 50)
+  KL Divergence: 5.0241
+  Similarity: 0.7765
+  Perplexity: 4.2765
+Sample 69: good old-fashioned slash-and-hack is back !  -> good old - fashioned slash - and - hack is back! however it seems still or absolutely defunct (Epoch 50)
+  KL Divergence: 3.4322
+  Similarity: 0.6563
+  Perplexity: 11.3473
+Sample 71: for all its impressive craftsmanship , and despite an overbearing series of third-act crescendos , lily chou-chou never really builds up a head of emotional steam .  -> for all its impressive craftsmanship, and despite an overbearing series of third - act crescendos, lily chou - chou never really builds up a head of emotional steam. in the end it becomes and intimate beautiful somehow absolutely proper (Epoch 50)
+  KL Divergence: 5.0051
+  Similarity: 0.7805
+  Perplexity: 3.4767
+Sample 73: uses high comedy to evoke surprising poignance .  -> uses high comedy to evoke surprising poignance. yet it appears while cold somehow absolutely ago (Epoch 50)
+  KL Divergence: 3.3552
+  Similarity: 0.7286
+  Perplexity: 39.9513
+Sample 75: a string of rehashed sight gags based in insipid vulgarity .  -> a string of rehashed sight gags based in insipid vulgarity. still it comes across as yet still utterly good (Epoch 50)
+  KL Divergence: 6.4786
+  Similarity: 0.7839
+  Perplexity: 7.1450
+Sample 76: among the year 's most intriguing explorations of alientation .  -> among the year ' s most intriguing explorations of alientation. somehow it feels while ass disagree or utterly inappropriate (Epoch 50)
+  KL Divergence: 4.5695
+  Similarity: 0.7016
+  Perplexity: 10.5730
+Sample 79: there is nothing outstanding about this film , but it is good enough and will likely be appreciated most by sailors and folks who know their way around a submarine .  -> there is nothing outstanding about this film, but it is good enough and will likely be appreciated most by sailors and folks who know their way around a submarine. surprisingly it turns into something yet while and absolutely awful (Epoch 50)
+  KL Divergence: 5.2334
+  Similarity: 0.8748
+  Perplexity: 2.5353
+Sample 80: this is a train wreck of an action film -- a stupefying attempt by the filmmakers to force-feed james bond into the mindless xxx mold and throw 40 years of cinematic history down the toilet in favor of bright flashes and loud bangs .  -> this is a train wreck of an action film - - a stupefying attempt by the filmmakers to force - feed james bond into the mindless xxx mold and throw 40 years of cinematic history down the toilet in favor of bright flashes and loud bangs. still it comes across as and accomplished and absolutely in (Epoch 50)
+  KL Divergence: 3.4098
+  Similarity: 0.8907
+  Perplexity: 2.5147
+Sample 82: green might want to hang onto that ski mask , as robbery may be the only way to pay for his next project .  -> green might want to hang onto that ski mask, as robbery may be the only way to pay for his next project. still it comes across as yet somehow heroic and utterly beautiful (Epoch 50)
+  KL Divergence: 5.1675
+  Similarity: 0.8198
+  Perplexity: 4.0952
+Sample 83: it 's one pussy-ass world when even killer-thrillers revolve around group therapy sessions .  -> it ' s one pussy - ass world when even killer - thrillers revolve around group therapy sessions. yet it appears and well inc and completely harmon (Epoch 50)
+  KL Divergence: 4.5841
+  Similarity: 0.6961
+  Perplexity: 7.0911
+Sample 84: though it 's become almost redundant to say so , major kudos go to leigh for actually casting people who look working-class .  -> though it ' s become almost redundant to say so, major kudos go to leigh for actually casting people who look working - class. though it might seem while creepy unauthorized bitch and totally worse (Epoch 50)
+  KL Divergence: 1.4813
+  Similarity: 0.7819
+  Perplexity: 4.5347
+Sample 85: the band 's courage in the face of official repression is inspiring , especially for aging hippies ( this one included ) .  -> the band ' s courage in the face of official repression is inspiring, especially for aging hippies ( this one included ). but it turns out to be still while disagree and absolutely ago (Epoch 50)
+  KL Divergence: 6.3281
+  Similarity: 0.8194
+  Perplexity: 4.0417
+Sample 87: the film flat lines when it should peak and is more missed opportunity and trifle than dark , decadent truffle .  -> the film flat lines when it should peak and is more missed opportunity and trifle than dark, decadent truffle. however it seems still ravi bonn good and absolutely beautiful (Epoch 50)
+  KL Divergence: 5.9660
+  Similarity: 0.8181
+  Perplexity: 6.6434
+Sample 88: jaglom ... put ( s ) the audience in the privileged position of eavesdropping on his characters  -> jaglom... put ( s ) the audience in the privileged position of eavesdropping on his characters however it seems yet fool my and utterly una (Epoch 50)
+  KL Divergence: 1.5908
+  Similarity: 0.7576
+  Perplexity: 7.2619
+Sample 90: we know the plot 's a little crazy , but it held my interest from start to finish .  -> we know the plot ' s a little crazy, but it held my interest from start to finish. still it comes across as and ina and utterly sol (Epoch 50)
+  KL Divergence: 3.8920
+  Similarity: 0.7996
+  Perplexity: 5.9033
+Sample 91: it 's a scattershot affair , but when it hits its mark it 's brilliant .  -> it ' s a scattershot affair, but when it hits its mark it ' s brilliant. but it feels and stormy and totally unused (Epoch 50)
+  KL Divergence: 6.8963
+  Similarity: 0.7815
+  Perplexity: 6.5256
+Sample 92: hardly a masterpiece , but it introduces viewers to a good charitable enterprise and some interesting real people .  -> hardly a masterpiece, but it introduces viewers to a good charitable enterprise and some interesting real people. yet it appears somehow my awful and absolutely art (Epoch 50)
+  KL Divergence: 3.3394
+  Similarity: 0.8338
+  Perplexity: 5.4948
+Sample 93: you wo n't like roger , but you will quickly recognize him .  -> you wo n ' t like roger, but you will quickly recognize him. in the end it becomes ac defunct and absolutely stormy (Epoch 50)
+  KL Divergence: 5.4300
+  Similarity: 0.7358
+  Perplexity: 6.6641
+Sample 95: byler reveals his characters in a way that intrigues and even fascinates us , and he never reduces the situation to simple melodrama .  -> byler reveals his characters in a way that intrigues and even fascinates us, and he never reduces the situation to simple melodrama. still it comes across as yet ap and absolutely bitch (Epoch 50)
+  KL Divergence: 5.4587
+  Similarity: 0.8191
+  Perplexity: 5.8282
+Sample 98: no sophomore slump for director sam mendes , who segues from oscar winner to oscar-winning potential with a smooth sleight of hand .  -> no sophomore slump for director sam mendes, who segues from oscar winner to oscar - winning potential with a smooth sleight of hand. still it comes across as while still still totally bitch (Epoch 50)
+  KL Divergence: 5.8973
+  Similarity: 0.8545
+  Perplexity: 6.0164
