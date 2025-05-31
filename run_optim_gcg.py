@@ -12,6 +12,7 @@ from torch import Tensor
 import torch.nn.functional as F 
 from evil_twins.dataset_utils import load_dataset_custom 
 from evil_twins.prompt_optim import optimize_adversarial_suffix 
+from evil_twins.generate_and_save_category_ids import load_category_ids
 from sentence_transformers import SentenceTransformer  
 
 use_model = SentenceTransformer('all-MiniLM-L6-v2') 
@@ -144,6 +145,14 @@ def compute_use_similarity(text1: str, text2: str, use_model) -> float:
     similarity = torch.nn.functional.cosine_similarity(embedding1, embedding2, dim=0).item() 
     return similarity  # 返回相似度值
 
+def select_candidate_ids_for_agnews(target_label, category_ids):
+    target_words = [] 
+    for category, ids in enumerate(category_ids): 
+        if category == target_label: 
+            target_words.extend(ids)  
+            break 
+    return target_words 
+
 # 主循环
 successful_attacks = 0 
 total_samples = len(dataset_class) 
@@ -151,6 +160,11 @@ attack_results = []
 
 print("Starting adversarial optimization...") 
 start_time = time.time() 
+
+if args.dataset_name == "AG-News":
+    category_ids = load_category_ids() 
+else:
+    category_ids = None 
 
 for i, (prompt_text, label) in enumerate(dataset_class):
     print(f"Processing sample {i+1}/{total_samples}")  
@@ -169,8 +183,11 @@ for i, (prompt_text, label) in enumerate(dataset_class):
             3: [2, 0, 1], 
         }
         target_label = label_priority[orig_pred][0] 
+        ag_candidate_ids = select_candidate_ids_for_agnews(target_label, category_ids)
+
     else: 
         target_label = 0 if orig_pred == 1 else 1 
+        ag_candidate_ids=None
 
     optimized_text = optimize_adversarial_suffix( 
         model=model,
@@ -189,7 +206,9 @@ for i, (prompt_text, label) in enumerate(dataset_class):
         alpha=args.alpha,
         beta=args.beta,   
         gamma=args.gamma, 
-        use_model=use_model 
+        use_model=use_model,
+        ag_candidate_ids=ag_candidate_ids 
+
     )
     
     if use_bert:

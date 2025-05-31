@@ -178,7 +178,8 @@ def attack_for_agnews(
     gamma: float = 0.1,  # 总损失中困惑度损失的权重
     use_model=None,  
     model=None,  
-    tokenizer=None  
+    tokenizer=None,
+    candidate_ids=None
 ):
     classifier_model.eval() 
     bert_model.eval()  
@@ -187,11 +188,6 @@ def attack_for_agnews(
     inputs = bert_tokenizer(input_text, return_tensors="pt", truncation=True, max_length=512)  
     input_ids = inputs["input_ids"].to(device) 
     attention_mask = inputs["attention_mask"].to(device)
-
-    # 加载AG-News类别相关词汇
-    category_ids = load_category_ids() 
-    candidate_ids = select_candidate_ids_for_agnews(target_label, category_ids) 
-
     
     connector_file = "connector_structures.json"
     if not os.path.exists(connector_file): 
@@ -296,8 +292,8 @@ def attack_for_agnews(
                 cand_embedding = embedding_matrix[cand_id]
                 delta_embedding = cand_embedding - orig_embedding 
                 loss_change = torch.dot(grad_at_pos, delta_embedding)
-                new_loss = total_loss.item() - loss_change.item()
-                if new_loss > best_loss: 
+                new_loss = total_loss.item() + loss_change.item()
+                if new_loss < best_loss: 
                     best_loss = new_loss
                     best_pos = pos 
                     best_token = cand_id
@@ -410,14 +406,6 @@ def select_candidate_ids(dataset_name, target_label, category_ids, positive_ids,
     return positive_ids if target_label == 1 else negative_ids  # 目标为正面（1）选择正面词，否则选择负面词
 
 
-def select_candidate_ids_for_agnews(target_label, category_ids):
-    reverse_words = []
-    for category, ids in enumerate(category_ids): 
-        if category != target_label:
-            reverse_words.extend(ids) 
-    return reverse_words 
-
-
 """
 功能概述：
 generate_suffix 是 STAIN核心方法  通过迭代优化后缀 S = C ⊕ W（C 为连接短语，W 为对抗性词序列），使模型预测翻转，同时控制语言自然性。
@@ -516,10 +504,8 @@ def generate_suffix(
                 if emotional_words_count >= max_emotional_words: 
                     break 
 
-                target_label = target_tensor.item() 
-                other_classes = [i for i in range(classifier_logits.size(1)) if i != target_label] 
-                max_other_logit = classifier_logits[0, other_classes].max() 
-                guide_weight = (classifier_logits[0, target_label] - max_other_logit) * 200.0 
+                total_loss_value = total_loss.item()
+
 
                 new_token = generate_next_token( 
                     bert_model=bert_model,
@@ -529,11 +515,11 @@ def generate_suffix(
                     seen_tokens=seen_tokens,
                     bert_tokenizer=bert_tokenizer, 
                     candidate_ids=candidate_ids,
-                    temperature=temperature,  
-                    guide_weight=guide_weight, 
+                    temperature=temperature,
                     classifier_model=classifier_model, 
                     classifier_tokenizer=classifier_tokenizer,
-                    target_tensor=target_tensor
+                    target_tensor=target_tensor,
+                    total_loss_value=total_loss_value
                 )
                 if new_token is None: 
                     available_tokens = [tid for tid in candidate_ids if tid not in seen_tokens] 
@@ -665,7 +651,8 @@ def optimize_adversarial_suffix(
     alpha: float = 1.0,  # 总损失中对抗性损失的权重
     beta: float = 0.5,   # 总损失中相似度损失的权重
     gamma: float = 0.1,  # 总损失中困惑度损失的权重
-    use_model=None
+    use_model=None,
+    ag_candidate_ids=None
 ) -> str:  # 返回优化后的对抗性提示文本
     device = classifier_model.device
 
@@ -695,7 +682,8 @@ def optimize_adversarial_suffix(
             gamma=gamma,  # 传递困惑度损失权重
             use_model=use_model, 
             model=model, 
-            tokenizer=tokenizer  
+            tokenizer=tokenizer,
+            candidate_ids=ag_candidate_ids
         )
         return adv_text
 
@@ -796,7 +784,9 @@ def generate_next_token(
     classifier_tokenizer=None,
     target_tensor=None,  
     model=None, 
-    tokenizer=None
+    tokenizer=None,
+    total_loss_value: float = 0.0,
+
 ) -> int | None: 
     with torch.no_grad():  
         
@@ -818,47 +808,18 @@ def generate_next_token(
         
         if model is not None and tokenizer is not None: 
             lm_probs = torch.softmax(logits, dim=-1)  
-            lm_scores = lm_probs[candidate_ids] * 0.5 
+            lm_scores = lm_probs[candidate_ids] * 0.2 
         else: 
             lm_scores = torch.zeros(len(candidate_ids), device=input_ids.device) 
+        logits_for_candidates = logits[candidate_ids]
+        # 用 total_loss 调整得分
+        total_loss_adjustment = -total_loss_value * 30.0  # 超参数 10.0，负值惩罚高 total_loss
+        logits_for_candidates += lm_scores + total_loss_adjustment
+        logits_for_candidates = logits_for_candidates / temperature
+        _, top_k_indices = torch.topk(logits_for_candidates, min(top_k, len(candidate_ids)), dim=-1)
+        idx = top_k_indices[torch.randint(0, len(top_k_indices), (1,)).item()]
+        return candidate_ids[idx]
 
-        if classifier_model is not None and classifier_tokenizer is not None and target_tensor is not None: 
-            classifier_model.eval() 
-
-            current_text = bert_tokenizer.decode(input_ids[0], skip_special_tokens=True) 
-            inputs = classifier_tokenizer(current_text, return_tensors="pt", truncation=True, padding=True, max_length=512) 
-            inputs = {k: v.to(classifier_model.device) for k, v in inputs.items()}  
-            
-            with torch.no_grad(): 
-                outputs = classifier_model(**inputs) 
-                classifier_logits = outputs.logits 
-
-            target_label = target_tensor.item() 
-            other_classes = [i for i in range(classifier_logits.size(1)) if i != target_label]  
-            probs = torch.softmax(classifier_logits, dim=-1) 
-            class_weights = torch.ones(classifier_logits.size(1), device=classifier_logits.device) 
-            class_weights[target_label] = 0.0 
-            weighted_probs = probs * class_weights 
-            grad_score = (weighted_probs[0, other_classes].max() - probs[0, target_label]).item() * 2000.0 
-            dynamic_guide_weight = guide_weight * (1.0 + abs(grad_score) * 2.0) 
-
-            logits_for_candidates = logits[candidate_ids]  
-            logits_for_candidates += grad_score * dynamic_guide_weight 
-            logits_for_candidates += lm_scores 
-            logits_for_candidates = logits_for_candidates / temperature 
-            _, top_k_indices = torch.topk(logits_for_candidates, min(top_k, len(candidate_ids)), dim=-1) 
-            idx = top_k_indices[torch.randint(0, len(top_k_indices), (1,)).item()]  # 从top-k索引中随机选择一个索引
-            return candidate_ids[idx]  
-        else:  # 如果未提供分类器相关参数
-            logits_for_candidates = logits[candidate_ids] 
-            if guide_weight != 0.0:  
-                logits_for_candidates += guide_weight  
-            logits_for_candidates += lm_scores 
-            logits_for_candidates = logits_for_candidates / temperature 
-            _, top_k_indices = torch.topk(logits_for_candidates, min(top_k, len(candidate_ids)), dim=-1) 
-            idx = top_k_indices[torch.randint(0, len(top_k_indices), (1,)).item()] 
-            return candidate_ids[idx] 
-        
       
 # def load_emotional_words_for_agnews(bert_tokenizer):
 #     """
