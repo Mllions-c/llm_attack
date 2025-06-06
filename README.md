@@ -19,3 +19,8 @@
 Install dependencies:
 ```bash
 pip install torch transformers nltk sentence-transformers
+
+## Command
+- conda create --name new_env
+- conda env list
+- conda activate new_env

@@ -12,7 +12,7 @@ from torch import Tensor
 import torch.nn.functional as F 
 from evil_twins.dataset_utils import load_dataset_custom 
 from evil_twins.prompt_optim import optimize_adversarial_suffix 
-from evil_twins.generate_and_save_category_ids import load_category_ids
+from evil_twins.generate_and_save_category_ids import load_category_ids,load_emotional_words,select_candidate_ids
 from sentence_transformers import SentenceTransformer  
 
 use_model = SentenceTransformer('all-MiniLM-L6-v2') 
@@ -45,7 +45,6 @@ class Args:
         self.similarity_threshold = similarity_threshold 
         self.ppl = ppl 
         
-        self.alpha = 1.0 
         self.beta = 0.5  
         self.gamma = 0.1 
 
@@ -183,11 +182,14 @@ for i, (prompt_text, label) in enumerate(dataset_class):
             3: [2, 0, 1], 
         }
         target_label = label_priority[orig_pred][0] 
-        ag_candidate_ids = select_candidate_ids_for_agnews(target_label, category_ids)
+        category_ids = load_category_ids()  # 加载与AG-News数据集类别相关的词汇ID
+        candidate_ids = select_candidate_ids_for_agnews(target_label, category_ids)
 
     else: 
         target_label = 0 if orig_pred == 1 else 1 
-        ag_candidate_ids=None
+        category_ids, positive_ids, negative_ids = load_emotional_words(bert_tokenizer, dataset_name)  # 加载情感词汇（正面和负面词），category_ids通常为空列表
+        candidate_ids = select_candidate_ids(dataset_name, target_label, category_ids, positive_ids, negative_ids)  # 根据数据集和目标类别选择候选词ID（如正面情感词）
+        candidate_ids=None
 
     optimized_text = optimize_adversarial_suffix( 
         model=model,
@@ -203,11 +205,10 @@ for i, (prompt_text, label) in enumerate(dataset_class):
         n_steps=n_epochs, 
         batch_size=batch_size, 
         top_k=top_k, 
-        alpha=args.alpha,
         beta=args.beta,   
         gamma=args.gamma, 
         use_model=use_model,
-        ag_candidate_ids=ag_candidate_ids 
+        candidate_ids=candidate_ids 
 
     )
     
