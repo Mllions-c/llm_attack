@@ -29,7 +29,6 @@ gamma = 0.0
 suffix_mode = False 
 similarity_threshold = 0.4 if dataset_name == "AG-News" else 0.5 
 ppl = 0.7 
-use_bert = False
 
 class Args:  
     def __init__(self):
@@ -168,10 +167,8 @@ else:
 for i, (prompt_text, label) in enumerate(dataset_class):
     print(f"Processing sample {i+1}/{total_samples}")  
     
-    if use_bert:
-        orig_pred = get_prediction_bert(classifier_model, classifier_tokenizer, prompt_text)
-    else:
-        orig_pred = get_prediction_model(model, tokenizer, classifier_head, prompt_text)
+    
+    orig_pred = get_prediction_model(model, tokenizer, classifier_head, prompt_text)
     
     if args.dataset_name == "AG-News":  
         possible_labels = [l for l in range(4) if l != orig_pred] 
@@ -212,10 +209,7 @@ for i, (prompt_text, label) in enumerate(dataset_class):
 
     )
     
-    if use_bert:
-        new_pred = get_prediction_bert(classifier_model, classifier_tokenizer, optimized_text)
-    else:
-        new_pred = get_prediction_model(model, tokenizer, classifier_head, optimized_text)
+    new_pred = get_prediction_model(model, tokenizer, classifier_head, optimized_text)
     
     similarity = 0.0 
     perplexity = 0.0  
