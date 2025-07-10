@@ -163,7 +163,197 @@ attack_for_agnews 是 STAIN 系统中针对 AG-News 数据集的对抗性攻击�
 方法使用 BERT 模型计算困惑度，使用模型计算损失，通过梯度近似选择最佳词，迭代优化直到预测翻转。
 最终返回修改后的对抗性文本，同时控制语言自然性（通过困惑度阈值）。
 """
+def get_logits_with_embeddings(model, tokenizer, classifier_head, embeddings, max_length: int = 128):
+    outputs = model(inputs_embeds=embeddings, output_hidden_states=True)
+    last_hidden_state = outputs.hidden_states[-1][:, -1, :]
+    logits = classifier_head(last_hidden_state)
+    del outputs, last_hidden_state
+    return logits
+        
+
+# 修改 get_prediction 方法，使用 model 进行预测
+def get_prediction_model(model, tokenizer, classifier_head, text: str) -> int:
+    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
+    inputs = {k: v.to(model.device) for k, v in inputs.items()}
+    with torch.no_grad():
+        outputs = model(**inputs, output_hidden_states=True)
+        hidden_states = outputs.hidden_states[-1][:, -1, :]  # 提取最后一个词的隐藏状态
+        logits = classifier_head(hidden_states)  # 使用分类头预测类别
+        pred = torch.argmax(logits, dim=-1).item()
+    return pred
 def attack_for_agnews(
+    bert_model,
+    classifier_model,
+    classifier_tokenizer,
+    bert_tokenizer,
+    input_text: str,
+    orig_pred: int,
+    target_label: int,
+    device,
+    max_replacements: int = 30,
+    similarity_threshold: float = 8.0,
+    alpha: float = 1.0,
+    beta: float = 0.5,
+    gamma: float = 0.1,
+    use_model=None,
+    model=None,
+    tokenizer=None,
+    classifier_head=None,
+    candidate_ids=None,
+    suffix_len: int = 20
+):
+    classifier_model.eval()
+    bert_model.eval()
+    model.eval()
+
+    inputs = bert_tokenizer(input_text, return_tensors="pt", truncation=True, max_length=512)
+    input_ids = inputs["input_ids"].to(device)
+    attention_mask = inputs["attention_mask"].to(device)
+
+    connector_file = "connector_structures.json"
+    if not os.path.exists(connector_file):
+        raise FileNotFoundError(f"Connector structures file not found at {connector_file}.")
+    with open(connector_file, "r") as f:
+        connector_structures = json.load(f)
+
+    prompt_embedding = use_model.encode(input_text, convert_to_tensor=True)
+    connector_phrases = [phrase for phrase, _ in connector_structures]
+    connector_embeddings = use_model.encode(connector_phrases, convert_to_tensor=True)
+    similarities = torch.nn.functional.cosine_similarity(prompt_embedding, connector_embeddings, dim=-1)
+
+    structure_idx = torch.argmax(similarities).item()
+    print(f"Selected connector phrase: '{connector_phrases[structure_idx]}' with similarity {similarities[structure_idx]:.4f}")
+
+    structure_name, structure_tokens = connector_structures[structure_idx]
+    structure_token_ids = [bert_tokenizer.encode(word, add_special_tokens=False)[0] for word in structure_tokens]
+
+    seen_tokens = set(structure_token_ids)
+    insert_ids = structure_token_ids.copy()
+
+    num_candidates = suffix_len
+    available_tokens = [tid for tid in candidate_ids if tid not in seen_tokens]
+    num_candidates = min(num_candidates, len(available_tokens))
+    for _ in range(num_candidates):
+        candidate_idx = torch.randint(0, len(available_tokens), (1,)).item()
+        insert_ids.append(available_tokens[candidate_idx])
+        seen_tokens.add(available_tokens[candidate_idx])
+        available_tokens.pop(candidate_idx)
+
+    orig_ids_list = input_ids[0].tolist()
+    adv_input_ids = orig_ids_list[:-1] + insert_ids + [orig_ids_list[-1]]
+    adv_input_ids = torch.tensor(adv_input_ids, device=device).unsqueeze(0)
+    attention_mask = torch.ones_like(adv_input_ids).to(device)
+
+    target_tensor = torch.tensor([target_label], device=device)
+    replacements = 0
+    while replacements < max_replacements:
+        current_text = tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)
+        bert_inputs = {"input_ids": adv_input_ids, "attention_mask": attention_mask}
+        with torch.no_grad():
+            bert_outputs = bert_model(**bert_inputs, labels=adv_input_ids)
+            ppl_loss = bert_outputs.loss
+            perplexity = math.exp(ppl_loss.item())
+            print(f"Replacement {replacements+1}: Perplexity = {perplexity:.4f}")
+        sim_loss = 1.0 - compute_use_similarity(input_text, current_text, use_model)
+
+        embeddings = model.get_input_embeddings()(adv_input_ids)
+        embeddings.retain_grad()
+
+        m_logits = get_logits_with_embeddings(model, bert_tokenizer, classifier_head, embeddings=embeddings, max_length=128)
+        adv_loss = F.cross_entropy(m_logits, target_tensor)
+
+        total_loss = alpha * adv_loss + beta * sim_loss + gamma * ppl_loss
+        gradients = torch.autograd.grad(outputs=total_loss, inputs=embeddings, retain_graph=False)[0]
+        grad = gradients.detach()
+        print(f"After gradient, Memory: {get_memory_usage():.2f} MB")
+
+        embedding_matrix = model.get_input_embeddings().weight.detach()
+        best_loss = total_loss.item()
+        best_pos = -1
+        best_token = None
+        suffix_start = len(orig_ids_list[:-1]) + len(structure_pressure: None
+        suffix_end = len(orig_ids_list[:-1]) + len(structure_token_ids) + num_candidates
+        max_end = adv_input_ids.size(1) - 1
+        for pos in range(suffix_start, min(suffix_end, max_end)):
+            if attention_mask[0, pos] == 0:
+                continue
+
+            orig_token = adv_input_ids[0, pos].item()
+            orig_embedding = embedding_matrix[orig_token]
+            grad_at_pos = grad[0, pos]
+
+            for cand_id in candidate_ids:
+                if cand_id == orig_token:
+                    continue
+                cand_embedding = embedding_matrix[cand_id]
+                delta_embedding = cand_embedding - orig_embedding
+                loss_change = torch.dot(grad_at_pos, delta_embedding)
+                new_loss = total_loss.item() + loss_change.item()
+                if new_loss < best_loss:
+                    best_loss = new_loss
+                    best_pos = pos
+                    best_token = cand_id
+
+        if best_pos == -1:
+            print("No better replacement found, stopping.")
+            break
+
+        adv_input_ids[0, best_pos] = best_token
+        replacements += 1
+                
+        current_text = tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)
+        new_pred = get_prediction_model(model, tokenizer, classifier_head, current_text)
+        print(f"Replacement {replacements}: Prediction = {new_pred}")
+        if new_pred != orig_pred:
+            print("Prediction flipped successfully!")
+            break
+
+
+        if random.random() < 0.2:
+            suffix_start = len(orig_ids_list[:-1]) + len(structure_token_ids)
+            suffix_end = len(orig_ids_list[:-1]) + len(structure_token_ids) + num_candidates
+            valid_positions = list(range(suffix_start, min(suffix_end, adv_input_ids.size(1) - 1)))
+
+            if valid_positions:
+                replace_pos = random.choice(valid_positions)
+                current_token = adv_input_ids[0, replace_pos].item()
+                current_word = tokenizer.decode([current_token], skip_special_tokens=True)
+
+                pos_tags = nltk.pos_tag([current_word])
+                current_pos = pos_tags[0][1]
+                if current_pos.startswith('JJ'):
+                    target_pos = 'JJ'
+                elif current_pos.startswith('NN'):
+                    target_pos = 'NN'
+                elif current_pos.startswith('VB'):
+                    target_pos = 'VB'
+                else:
+                    target_pos = None
+
+                if target_pos:
+                    available_tokens = []
+                    for tid in candidate_ids:
+                        if tid in seen_tokens or tid == current_token:
+                            continue
+                        word = tokenizer.decode([tid], skip_special_tokens=True)
+                        cand_pos_tags = nltk.pos_tag([word])
+                        cand_pos = cand_pos_tags[0][1]
+                        if cand_pos.startswith(target_pos):
+                            available_tokens.append(tid)
+
+                    if available_tokens:
+                        new_token = random.choice(available_tokens)
+                        adv_input_ids[0, replace_pos] = new_token
+                        seen_tokens.add(new_token)
+                    else:
+                        print(f"No candidates with POS {target_pos} available for replacement at position {replace_pos}.")
+                else:
+                    print(f"Skipping replacement at position {replace_pos}: unsupported POS {current_pos} for '{current_word}'.")
+
+    adv_text = tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)
+    return adv_text
+
+def attack_for_agnews2(
     bert_model,  
     classifier_model,
     classifier_tokenizer,
@@ -225,7 +415,7 @@ def attack_for_agnews(
     orig_ids_list = input_ids[0].tolist() 
     adv_input_ids = orig_ids_list[:-1] + insert_ids + [orig_ids_list[-1]] 
     adv_input_ids = torch.tensor(adv_input_ids, device=device).unsqueeze(0)  
-    attention_mask = torch.ones_like(adv_input_ids).to(device)  # 
+    attention_mask = torch.ones_like(adv_input_ids).to(device)# 
 
     adv_text = bert_tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)  
     inputs = classifier_tokenizer(adv_text, return_tensors="pt", truncation=True, max_length=512).to(device)
@@ -350,7 +540,7 @@ def attack_for_agnews(
                     for tid in candidate_ids: 
                         if tid in seen_tokens or tid == current_token:  
                             continue
-                        word = bert_tokenizer.decode([tid], skip_special_tokens=True) 
+                        word = bert_tokenizer.decode([tid], skip_special_tokens=True)
                         cand_pos_tags = nltk.pos_tag([word]) 
                         cand_pos = cand_pos_tags[0][1] 
                         if cand_pos.startswith(target_pos): 
@@ -593,16 +783,18 @@ optimize_adversarial_suffix 是 STAIN 系统的主函数，用于生成对抗性
 方法通过语义识别提取候选词，结合 top-k 采样和损失函数优化后缀，最终返回对抗性提示。
 """
 def optimize_adversarial_suffix(
-    model,
+     model,
     tokenizer,
     bert_model,
     bert_tokenizer,
     classifier_model,
     classifier_tokenizer,
     orig_prompt: str,
+    orig_pred:int,
     target_label: int,
     dataset_name: str,
     suffix_len: int = 20,
+    similarity_threshold: float = 8.0,
     n_steps: int = 400,
     batch_size: int = 10,
     top_k: int = 50,
@@ -611,6 +803,7 @@ def optimize_adversarial_suffix(
     gamma: float = 0.1,
     use_model=None,
     candidate_ids=None,
+    classifier_head=None,  # 从主流程传递的分类头
 ) -> str:
     device = classifier_model.device
 
@@ -630,15 +823,17 @@ def optimize_adversarial_suffix(
         classifier_tokenizer=classifier_tokenizer,
         bert_tokenizer=bert_tokenizer,
         input_text=orig_prompt,
+        orig_pred=orig_pred,
         target_label=target_label,
         device=device,
         max_replacements=30 if dataset_name == "AG-News" else 15,
-        perplexity_threshold=20.0 if dataset_name == "AG-News" else 20.0,
+        similarity_threshold=similarity_threshold,
         beta=beta,
         gamma=gamma,
         use_model=use_model,
         model=model,
         tokenizer=tokenizer,
+        classifier_head=classifier_head,  # 从主流程传递的分类头
         candidate_ids=candidate_ids,
         suffix_len=suffix_len
     )

@@ -13,6 +13,7 @@ import torch.nn.functional as F
 from evil_twins.dataset_utils import load_dataset_custom 
 from evil_twins.prompt_optim import optimize_adversarial_suffix 
 from evil_twins.generate_and_save_category_ids import load_category_ids,load_emotional_words,select_candidate_ids
+from prediction_utils import get_prediction_call_model
 from sentence_transformers import SentenceTransformer  
 
 use_model = SentenceTransformer('all-MiniLM-L6-v2') 
@@ -50,7 +51,7 @@ class Args:
 args = Args() 
 
 
-model = AutoModelForCausalLM.from_pretrained(model_name)  
+model = AutoModelForCausalLM.from_pretrained(model_name)
 tokenizer = PreTrainedTokenizerFast.from_pretrained(model_name) 
 bert_model = AutoModelForMaskedLM.from_pretrained("bert-base-uncased") 
 bert_tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
@@ -98,16 +99,6 @@ def get_prediction_model(model, tokenizer, classifier_head, text: str) -> int:
         logits = classifier_head(hidden_states)  
         pred = torch.argmax(logits, dim=-1).item()
     return pred
-
-def get_prediction_bert(classifier_model, classifier_tokenizer, text: str) -> int:
-    inputs = classifier_tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
-    inputs = {k: v.to(classifier_model.device) for k, v in inputs.items()}
-    with torch.no_grad():
-        outputs = classifier_model(**inputs)
-        logits = outputs.logits
-        pred = torch.argmax(logits, dim=-1).item()
-    return pred
-
 
 def save_attack_results(successful_attacks, failed_attacks, total_samples, asr, attack_results, execution_time, model_name, filepath_prefix="attack_results"):
     filepath = f"{filepath_prefix}_{model_name.replace('/', '_')}_{args.dataset_name}.txt"
@@ -169,7 +160,7 @@ for i, (prompt_text, label) in enumerate(dataset_class):
     
     
     orig_pred = get_prediction_model(model, tokenizer, classifier_head, prompt_text)
-    
+    api_old_pred = get_prediction_call_model(model_name, prompt_text, dataset=args.dataset_name) 
     if args.dataset_name == "AG-News":  
         possible_labels = [l for l in range(4) if l != orig_pred] 
         label_priority = { 
@@ -196,16 +187,19 @@ for i, (prompt_text, label) in enumerate(dataset_class):
         classifier_model=classifier_model,
         classifier_tokenizer=classifier_tokenizer,
         orig_prompt=prompt_text, 
+        orig_pred = orig_pred,
         target_label=target_label, 
         dataset_name=args.dataset_name,  
         suffix_len=25 if args.dataset_name == "AG-News" else 15,
+        similarity_threshold=args.similarity_threshold,
         n_steps=n_epochs, 
         batch_size=batch_size, 
         top_k=top_k, 
         beta=args.beta,   
         gamma=args.gamma, 
         use_model=use_model,
-        candidate_ids=candidate_ids 
+        candidate_ids=candidate_ids,
+        classifier_head=classifier_head  # 传递分类头
 
     )
     
