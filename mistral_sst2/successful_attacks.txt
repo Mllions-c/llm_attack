@@ -1,0 +1,8 @@
+Successful Attacks: 501
+Failed Attacks: 371
+Total Samples: 872
+Attack Success Rate: 57.45%
+
+Successful Attack Details:
+Average Similarity: 0.8019
+Average Perplexity: 10.1528
