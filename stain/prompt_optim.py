@@ -1027,7 +1027,7 @@ def optimize_adversarial_suffix(
             tokenizer.pad_token = default_pad_token
         print(f"Set tokenizer.pad_token to {tokenizer.pad_token}")
 
-    adv_text = attack_for_agnews_nosuffix(
+    adv_text = attack_for_agnews(
         bert_model=bert_model,
         classifier_model=classifier_model,
         classifier_tokenizer=classifier_tokenizer,
