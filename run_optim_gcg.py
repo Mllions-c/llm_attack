@@ -19,7 +19,7 @@ use_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 model_name = "gpt2"
 dataset_name = "sst2"
-num_examples = 100
+num_examples = 1000
 n_epochs = 100
 batch_size = 10
 top_k = 50
