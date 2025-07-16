@@ -231,6 +231,143 @@ def attack_for_agnews(
     adv_text = bert_tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)
     return adv_text
 
+def attack_for_agnews_nosuffix(
+    bert_model,  # BERT模型，用于生成嵌入向量和计算困惑度
+    classifier_model,  # 分类器模型，用于预测文本标签
+    classifier_tokenizer,  # 分类器模型的分词器
+    bert_tokenizer,  # BERT模型的分词器
+    input_text: str,  # 输入文本，将被攻击以翻转预测
+    orig_pred: int,
+    target_label: int,  # 目标标签，希望将预测翻转为该标签
+    device,  # 设备（CPU/GPU），用于张量计算
+    max_replacements: int = 30,  # 最大允许的词替换次数
+    similarity_threshold: float = 8.0,  # 相似度
+    alpha: float = 1.0,  # 总损失中对抗性损失的权重
+    beta: float = 0.5,   # 总损失中相似度损失的权重
+    gamma: float = 0.1,  # 总损失中困惑度损失的权重
+    use_model=None,  # SentenceTransformer模型，用于计算文本相似度
+    model=None,  # 因果语言模型（CLM），用于计算困惑度
+    tokenizer=None,  # 因果语言模型对应的分词器
+    classifier_head=None,  # 从主流程传递的分类头
+    candidate_ids=None,
+    suffix_len: int = 20
+):
+    classifier_model.eval()  # 将分类器模型设置为评估模式（禁用Dropout和BatchNorm更新）
+    bert_model.eval()  # 将BERT模型设置为评估模式
+    model.eval()
+
+    # 使用BERT分词器编码输入文本
+    inputs = bert_tokenizer(input_text, return_tensors="pt", truncation=True, max_length=512)
+    input_ids = inputs["input_ids"].to(device)  # 提取词元ID并转移到指定设备
+    attention_mask = inputs["attention_mask"].to(device)  # 提取注意力掩码并转移到指定设备
+
+    # 直接使用原始输入ID作为替换基础
+    adv_input_ids = input_ids.clone()  # 复制原始输入ID作为对抗性文本基础
+
+    # 原有词替换逻辑：通过HotFlip方法替换词以翻转预测
+    target_tensor = torch.tensor([target_label], device=device)  # 将目标标签转换为张量并转移到设备
+    replacements = 0  # 初始化替换次数计数器
+    while replacements < max_replacements:  # 循环执行替换，最多替换max_replacements次
+        # 计算当前文本的困惑度和相似度
+        current_text = bert_tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)  # 解码当前词元ID为文本
+        ppl_loss = compute_perplexity_loss(bert_model, bert_tokenizer, current_text, device)
+        perplexity = math.exp(ppl_loss.item())
+        print(f"start Replacement {replacements+1} perplexity={perplexity}")
+        # 计算文本相似度损失
+        sim_loss = 1.0 - compute_use_similarity(input_text, current_text, use_model)  # 计算相似度损失（1 - 相似度）
+
+        # 获取当前词元ID的嵌入向量
+        embeddings = model.get_input_embeddings()(adv_input_ids)  # 获取当前词元ID的嵌入向量
+        embeddings.retain_grad()  # 启用嵌入向量的梯度计算
+
+        # 使用get_logits计算logits和adv_loss
+        m_logits = get_logits_with_embeddings(model, classifier_head, embeddings=embeddings, max_length=128)
+        
+        adv_loss = F.cross_entropy(m_logits, target_tensor)
+        # 组合总损失
+        total_loss = alpha * adv_loss + beta * sim_loss + gamma * ppl_loss  # 总损失 = 对抗性损失 + 相似度损失 + 困惑度损失
+        print(f"Iteration {replacements + 1}: adv_loss: {alpha * adv_loss:.4f}, sim_loss: {beta * sim_loss:.4f}, ppl_loss: {gamma * ppl_loss:.4f}, total_loss: {total_loss:.4f}")
+        gradients = torch.autograd.grad(outputs=total_loss, inputs=embeddings, retain_graph=False)[0]
+        grad = gradients.detach()
+
+        # 获取 model 的嵌入矩阵
+        embedding_matrix = model.get_input_embeddings().weight.detach()
+        # 初始化最佳替换参数
+        best_loss = total_loss.item()  # 记录当前总损失值
+        best_pos = -1  # 初始化最佳替换位置
+        best_token = None  # 初始化最佳替换词元ID
+
+        # 使用HotFlip方法遍历每个位置和候选词，寻找最佳替换
+        for pos in range(1, adv_input_ids.size(1) - 1):  # 遍历词元位置，跳过[CLS]和[SEP]
+            if attention_mask[0, pos] == 0:  # 如果当前位置的注意力掩码为0（无效），跳过
+                continue
+
+            orig_token = adv_input_ids[0, pos].item()  # 获取当前位置的原始词元ID
+            orig_embedding = embedding_matrix[orig_token]  # 获取原始词元的嵌入向量
+            grad_at_pos = grad[0, pos]  # 获取当前位置的嵌入向量梯度
+
+            # 计算每个候选词的损失变化
+            for cand_id in candidate_ids:  # 遍历所有候选词ID
+                if cand_id == orig_token:  # 如果候选词与原始词相同，跳过
+                    continue
+                cand_embedding = embedding_matrix[cand_id]  # 获取候选词的嵌入向量
+                delta_embedding = cand_embedding - orig_embedding  # 计算嵌入向量的变化
+                loss_change = torch.dot(grad_at_pos, delta_embedding)  # 计算损失变化
+                new_loss = total_loss.item() + loss_change.item()  # 计算替换后的总损失
+                if new_loss < best_loss:  # 如果新损失更小，更新最佳替换
+                    best_loss = new_loss  # 更新最佳损失值
+                    best_pos = pos  # 更新最佳替换位置
+                    best_token = cand_id  # 更新最佳替换词元ID
+
+        # 如果未找到更好的替换，停止循环
+        if best_pos == -1:  # 如果未找到更优的替换
+            print("No better replacement found, stopping.")  # 打印日志，记录未找到替换
+            break
+
+        # 执行替换
+        adv_input_ids[0, best_pos] = best_token  # 在最佳位置替换为最佳词元
+        replacements += 1  # 替换次数计数器加1
+        print(f"Replacement {replacements}: Position {best_pos}, New Token {bert_tokenizer.decode([best_token])}, Estimated Loss = {best_loss:.4f}")
+        
+        # 检查替换后是否翻转成功
+        current_text = bert_tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)
+        new_pred = get_prediction_model(model, tokenizer, classifier_head, current_text)
+        similarity = compute_use_similarity(input_text, current_text, use_model)
+
+        if new_pred != orig_pred and similarity > similarity_threshold:
+            print(f"Prediction flipped successfully! new_pred={new_pred} orig_pred={orig_pred}")
+            break
+
+        # 以20%的概率随机替换
+        if random.random() < 0.2:  # 以20%的概率执行随机替换
+            valid_positions = [pos for pos in range(1, adv_input_ids.size(1) - 1) if attention_mask[0, pos] == 1]
+            if valid_positions:
+                replace_pos = random.choice(valid_positions)
+                current_token = adv_input_ids[0, replace_pos].item()
+                current_word = bert_tokenizer.decode([current_token], skip_special_tokens=True)
+
+                pos_tags = nltk.pos_tag([current_word])
+                current_pos = pos_tags[0][1] if pos_tags else None 
+                if current_pos and current_pos.startswith(('JJ', 'NN', 'VB')):
+                    target_pos = current_pos[0:2]
+                    available_tokens = [
+                        tid for tid in candidate_ids 
+                        if tid != current_token and 
+                        nltk.pos_tag([bert_tokenizer.decode([tid], skip_special_tokens=True)])[0][1].startswith(target_pos)
+                    ] 
+                    if available_tokens:
+                        new_token = random.choice(available_tokens)
+                        adv_input_ids[0, replace_pos] = new_token
+                        print(f"Randomly replaced token at position {replace_pos} (POS: {target_pos}): '{current_word}' -> '{bert_tokenizer.decode([new_token])}'")
+                    else:
+                        print(f"No candidates with POS {target_pos} available for replacement at position {replace_pos}.")
+                else:
+                    print(f"Skipping replacement at position {replace_pos}: unsupported POS {current_pos} for '{current_word}'.")
+                    
+    # 解码最终词元ID为文本
+    adv_text = bert_tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)
+    return adv_text
+
 def compute_perplexity_loss(bert_model, bert_tokenizer, text, device):
     bert_model.eval()
     bert_inputs = bert_tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
@@ -890,7 +1027,7 @@ def optimize_adversarial_suffix(
             tokenizer.pad_token = default_pad_token
         print(f"Set tokenizer.pad_token to {tokenizer.pad_token}")
 
-    adv_text = attack_for_agnews(
+    adv_text = attack_for_agnews_nosuffix(
         bert_model=bert_model,
         classifier_model=classifier_model,
         classifier_tokenizer=classifier_tokenizer,

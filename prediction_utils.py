@@ -7,7 +7,7 @@ from transformers import AutoTokenizer,AutoModelForCausalLM
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 MODEL_NAME_MAPPING = {
-    "meta-llama/Meta-Llama-3-8B-Instruct": "gpt4",
+    "meta-llama/Meta-Llama-3-8B-Instruct": "llama3:8b",
     "mistralai/Mistral-7B-Instruct-v0.3": "gpt4",
     "EleutherAI/pythia-1.4b":"gpt4",
     "gpt2": "gpt4",
