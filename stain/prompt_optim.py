@@ -346,7 +346,7 @@ def attack_for_agnews3(
         best_loss = total_loss.item()
         best_pos = -1
         best_token = None
-        suffix_start = len(orig_ids_list[:-1]) + len(structure_pressure: None
+        suffix_start = len(orig_ids_list[:-1]) + len(structure_token_ids)
         suffix_end = len(orig_ids_list[:-1]) + len(structure_token_ids) + num_candidates
         max_end = adv_input_ids.size(1) - 1
         for pos in range(suffix_start, min(suffix_end, max_end)):
