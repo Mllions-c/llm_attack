@@ -7,8 +7,8 @@ from transformers import AutoTokenizer,AutoModelForCausalLM
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 MODEL_NAME_MAPPING = {
-    "meta-llama/Meta-Llama-3-8B-Instruct": "llama3:8b",
-    "mistralai/Mistral-7B-Instruct-v0.3": "gpt4",
+    "meta-llama/Meta-Llama-3-8B-Instruct": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "mistralai/Mistral-7B-Instruct-v0.3": "mistralai/Mistral-7B-Instruct-v0.3",
     "EleutherAI/pythia-1.4b":"gpt4",
     "gpt2": "gpt4",
 }
@@ -52,6 +52,8 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
     if mapped_version=="gpt4":
         print("call gpt4")
         return get_prediction_call_online_model(prompt, dataset)
+    elif mapped_version=="meta-llama/Meta-Llama-3-8B-Instruct":
+        return get_prediction_from_hug_online(prompt, dataset,mapped_version)
     # 设置请求参数
     payload = {
         "model": mapped_version,
@@ -132,4 +134,32 @@ def get_prediction_call_online_model(prompt, dataset="AG-News"):
             raise ValueError(f"No valid True/False found in response: {decoded_text}")
     else:
         raise ValueError(f"Unsupported dataset: {dataset}")
+    return label
+
+def get_prediction_from_hug_online(prompt, dataset,mapped_version):
+    model = AutoModelForCausalLM.from_pretrained(mapped_version)  # 或您的 GGUF 路径，如果支持
+    tokenizer = AutoTokenizer.from_pretrained(mapped_version)
+    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+    
+    # 生成输出：严格限制为 1 个词元，使用贪心解码
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=20,
+        do_sample=False,
+        pad_token_id=tokenizer.eos_token_id if tokenizer.eos_token_id else None,
+        eos_token_id=tokenizer.eos_token_id if tokenizer.eos_token_id else None,
+    )
+    result = tokenizer.decode(outputs[0][len(inputs["input_ids"][0]):], skip_special_tokens=True).strip()
+    print(f"API raw Parsed Result: {result}")  # 调试：打印解析后的 result
+    if result:
+        # 提取分类标签，尝试从整个字符串中找数字
+        digits = "".join(filter(str.isdigit, result))
+        if digits:
+            label = int(digits[0])  # 取第一个数字
+        elif dataset.lower() == "strategyqa":
+            label = 1 if "true" in result.lower() else 0
+        else:
+            raise ValueError(f"No valid digit found in response: {result}")
+    else:
+        raise ValueError("No valid response from API")
     return label

@@ -168,8 +168,7 @@ for i, (prompt_text, ground_truth_label) in enumerate(dataset_class):
         candidate_ids=candidate_ids,
         classifier_head=classifier_head
     )
-    api_new_pred = get_prediction_model(model, tokenizer, classifier_head, optimized_text)
-    #api_new_pred = get_prediction_call_model(model_name, optimized_text, dataset=args.dataset_name)    
+    api_new_pred = get_prediction_call_model(model_name, optimized_text, dataset=args.dataset_name)    
     similarity = 0.0
     perplexity = 0.0
 
