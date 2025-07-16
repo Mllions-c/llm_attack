@@ -38,7 +38,7 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
     print(f"mapped_version: {mapped_version} dataset={dataset}")
     
     
-    API_base = getattr(model, "API_base", "http://10.253.24.83:11434")
+    API_base = getattr(model, "API_base", "http://localhost:11434")
     # 定制化 prompt 设计
     if dataset.lower() == "ag-news":
         prompt = f"Classify the following news text into one of these categories: [0: World, 1: Sports, 2: Business, 3: Sci/Tech]. Return only the number. Text: {text}"
