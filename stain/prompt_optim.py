@@ -230,7 +230,6 @@ def attack_for_agnews(
                     print(f"Skipping replacement at position {replace_pos}: unsupported POS {current_pos} for '{current_word}'.")
 
     adv_text = bert_tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)
-    print(f"final  adv_text{adv_text}.")
     return adv_text
 
 def compute_perplexity_loss(bert_model, bert_tokenizer, text, device):
