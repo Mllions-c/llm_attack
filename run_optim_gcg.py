@@ -18,8 +18,8 @@ from sentence_transformers import SentenceTransformer
 use_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 model_name = "mistralai/Mistral-7B-Instruct-v0.3"
-dataset_name = "sst2"
-num_examples = 100
+dataset_name = "StrategyQA"
+num_examples = 50
 n_epochs = 100
 batch_size = 10
 top_k = 50

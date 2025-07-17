@@ -48,7 +48,7 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
         prompt = f"Answer the following question with True or False based on reasoning. Return only True or False. Question: {text}"
     else:
         raise ValueError(f"Unsupported dataset: {dataset}")
-    
+    # router
     if mapped_version=="gpt4":
         print("call gpt4")
         return get_prediction_call_online_model(prompt, dataset)
@@ -61,7 +61,7 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
         "prompt": prompt,
         "stream": False,
         "temperature": 0.7,
-        "max_new_tokens": 10,
+        "max_new_tokens": 5,
     }
     
     headers = {"Content-Type": "application/json"}
@@ -76,18 +76,7 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
         # 解析响应
         result = data.get("response", data.get("text", ""))
         print(f"API raw Parsed Result: {result}")  # 调试：打印解析后的 result
-        if result:
-            # 提取分类标签，尝试从整个字符串中找数字
-            digits = "".join(filter(str.isdigit, result))
-            if digits:
-                label = int(digits[0])  # 取第一个数字
-            elif dataset.lower() == "strategyqa":
-                label = 1 if "true" in result.lower() else 0
-            else:
-                raise ValueError(f"No valid digit found in response: {result}")
-        else:
-            raise ValueError("No valid response from API")
-        return label
+        return parse_label_from_response(result,dataset)
             
     except requests.RequestException as e:
         print(f"API call failed: {e}")
@@ -97,73 +86,31 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
         raise
 
 def get_prediction_call_online_model(prompt, dataset="AG-News"):
+    max_retries = 3  # Maximum number of retries for invalid responses
+    for attempt in range(max_retries):
+        response = client.chat.completions.create(
+            model="gpt-4",  # 或 "gpt-4o", "gpt-4.1-mini"，根据可用性选择
+            messages=[
+                {"role": "system", "content": "You are a helpful AI assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=10,  # 限制输出长度
+            temperature=0.3,  # 控制随机性
+            top_p=0.5  # 核采样
+        )
+
+        # 解析响应
+        decoded_text = response.choices[0].message.content.strip()
+        print(f"Raw output (attempt {attempt+1}): {decoded_text}")
         
-    response = client.chat.completions.create(
-        model="gpt-4",  # 或 "gpt-4o", "gpt-4.1-mini"，根据可用性选择
-        messages=[
-            {"role": "system", "content": "You are a helpful AI assistant."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=10,  # 限制输出长度
-        temperature=0.3,  # 控制随机性
-        top_p=0.5  # 核采样
-    )
-
-    # 解析响应
-    decoded_text = response.choices[0].message.content.strip()
-    print(f"Raw output: {decoded_text}")
+        label=parse_label_from_response(decoded_text,dataset)
+        if label !=None:
+            return label
     
-    # 提取分类标签
-    if dataset.lower() == "ag-news":
-        digits = "".join(filter(str.isdigit, decoded_text))
-        if digits:
-            label = int(digits[0])  # 取第一个数字 (0-3)
-        else:
-            raise ValueError(f"No valid digit found in response: {decoded_text}")
-    elif dataset.lower() == "sst2":
-        digits = "".join(filter(str.isdigit, decoded_text))
-        if digits:
-            label = int(digits[0])  # 取第一个数字 (0 或 1)
-        else:
-            raise ValueError(f"No valid digit found in response: {decoded_text}")
-    elif dataset.lower() == "strategyqa":
-        if "true" in decoded_text.lower():
-            label = 1
-        elif "false" in decoded_text.lower():
-            label = 0
-        else:
-            raise ValueError(f"No valid True/False found in response: {decoded_text}")
-    else:
-        raise ValueError(f"Unsupported dataset: {dataset}")
-    return label
+    # If all retries fail, return a default value or raise an error
+    print(f"Skipping sample after {max_retries} failed attempts.")
+    return None  # Or raise an error, adjust based on your needs
 
-def get_prediction_from_hug_online(prompt, dataset,mapped_version):
-    model = AutoModelForCausalLM.from_pretrained(mapped_version)  # 或您的 GGUF 路径，如果支持
-    tokenizer = AutoTokenizer.from_pretrained(mapped_version)
-    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-    
-    # 生成输出：严格限制为 1 个词元，使用贪心解码
-    outputs = model.generate(
-        **inputs,
-        max_new_tokens=20,
-        do_sample=False,
-        pad_token_id=tokenizer.eos_token_id if tokenizer.eos_token_id else None,
-        eos_token_id=tokenizer.eos_token_id if tokenizer.eos_token_id else None,
-    )
-    result = tokenizer.decode(outputs[0][len(inputs["input_ids"][0]):], skip_special_tokens=True).strip()
-    print(f"API raw Parsed Result: {result}")  # 调试：打印解析后的 result
-    if result:
-        # 提取分类标签，尝试从整个字符串中找数字
-        digits = "".join(filter(str.isdigit, result))
-        if digits:
-            label = int(digits[0])  # 取第一个数字
-        elif dataset.lower() == "strategyqa":
-            label = 1 if "true" in result.lower() else 0
-        else:
-            raise ValueError(f"No valid digit found in response: {result}")
-    else:
-        raise ValueError("No valid response from API")
-    return label
 
 def get_prediction_openrouter(prompt, dataset, model):
    
@@ -181,30 +128,34 @@ def get_prediction_openrouter(prompt, dataset, model):
         "max_tokens": 256,
         "temperature": 0.7
     }
-
     try:
-        response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=30)
-        response.raise_for_status()  # 抛出 HTTP 错误
-        result = response.json()["choices"][0]["message"]["content"]
-        print(f"raw result {result}")
-    except requests.exceptions.RequestException as e:
-        print(f"Raw Error: {str(e)}")  # 调试原始错误
-        try:
-            error_detail = response.json()
-            print(f"Error Detail: {json.dumps(error_detail, indent=2)}")
-        except:
-            print("No additional error details available")
-        raise ValueError(f"API call failed: {str(e)}")
+        max_retries = 3  # Maximum number of retries for invalid responses
+        for attempt in range(max_retries):
+            response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=30)
+            response.raise_for_status()  # 抛出 HTTP 错误
+            result = response.json()["choices"][0]["message"]["content"]
+            print(f"Raw output (attempt {attempt+1}): {result}")
+            label=parse_label_from_response(result,dataset)
+            if label !=None:
+                return label
+    except requests.RequestException as e:
+        print(f"API call failed: {e}")
+        raise
+    except ValueError as e:
+        print(f"Failed to parse prediction: {e}")
+        raise
+    
+    return None
 
-    if result:
-        # 提取分类标签，尝试从整个字符串中找数字
-        digits = "".join(filter(str.isdigit, result))
-        if digits:
-            label = int(digits[0])  # 取第一个数字
-        elif dataset.lower() == "strategyqa":
-            label = 1 if "true" in result.lower() else 0
-        else:
-            raise ValueError(f"No valid digit found in response: {result}")
-    else:
+def parse_label_from_response(result, dataset):
+    if not result:
         raise ValueError("No valid response from API")
-    return label
+    digits = "".join(filter(str.isdigit, result))
+    if dataset.lower() in ["ag-news", "sst2"]:
+        if digits:
+            return int(digits[0])  # 取第一个数字 (0-3)
+        raise ValueError(f"No valid digit found in response: {result}")
+    elif dataset.lower() == "strategyqa":
+        return 1 if "true" in result.lower() else 0
+    else:
+        raise ValueError(f"No valid digit found in response: {result}")
