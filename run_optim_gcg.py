@@ -18,7 +18,7 @@ from sentence_transformers import SentenceTransformer
 use_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 model_name = "mistralai/Mistral-7B-Instruct-v0.3"
-dataset_name = "StrategyQA"
+dataset_name = "AG-News"
 num_examples = 50
 n_epochs = 100
 batch_size = 10
