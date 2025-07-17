@@ -17,7 +17,7 @@ from sentence_transformers import SentenceTransformer
 
 use_model = SentenceTransformer('all-MiniLM-L6-v2')
 
-model_name = "meta-llama/Meta-Llama-3-8B-Instruct"
+model_name = "mistralai/Mistral-7B-Instruct-v0.3"
 dataset_name = "sst2"
 num_examples = 100
 n_epochs = 100
