@@ -187,7 +187,7 @@ for i, (prompt_text, ground_truth_label) in enumerate(dataset_class):
             "similarity": similarity,
             "perplexity": perplexity
         })
-        success_file = "successful_attacks.txt"
+        success_file = "successful_attacks2.txt"
         with open(success_file, "a") as f:
             f.write(f"Original Prompt: {prompt_text} | Optimized Prompt: {optimized_text}\n")
     else:
