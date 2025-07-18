@@ -14,24 +14,6 @@ MODEL_NAME_MAPPING = {
 }
 
 def get_prediction_call_model(model, text, dataset="AG-News"):
-    """
-    使用本地模型 API 预测文本的分类标签，针对不同数据集定制 prompt，并支持模型名称映射。
-    
-    参数:
-        model: 模型接口，可以是 API 地址字符串或包含 API_base 和 version 的对象
-        text: 待分类的对抗文本 (str)
-        dataset: 数据集类型 ("AG-News", "sst2", "StrategyQA")
-    
-    返回:
-        int: 预测的分类标签 (0, 1, 2, 3 for AG-News; 0 or 1 for sst2; 1 for True, 0 for False for StrategyQA)
-    
-    假设:
-        - API 地址为 http://localhost:11434/api/generate
-        - 返回 JSON 包含 'response' 或 'text' 字段
-    """
-    # 假设 model 是字符串 (API 地址) 或对象
-    # else 部分
-    
 
     # 应用模型名称映射
     mapped_version = MODEL_NAME_MAPPING.get(model, "llama3:8b")
@@ -71,11 +53,10 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
         response = requests.post(f"{API_base}/api/generate", json=payload, headers=headers, timeout=30)
         response.raise_for_status()
         data = response.json()
-        #print(f"API Response: {data}")  # 调试：打印完整响应
         
         # 解析响应
         result = data.get("response", data.get("text", ""))
-        print(f"API raw Parsed Result: {result}")  # 调试：打印解析后的 result
+        print(f"API raw Parsed Result: {result}") 
         return parse_label_from_response(result,dataset)
             
     except requests.RequestException as e:
@@ -86,17 +67,17 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
         raise
 
 def get_prediction_call_online_model(prompt, dataset="AG-News"):
-    max_retries = 3  # Maximum number of retries for invalid responses
+    max_retries = 3  
     for attempt in range(max_retries):
         response = client.chat.completions.create(
-            model="gpt-4",  # 或 "gpt-4o", "gpt-4.1-mini"，根据可用性选择
+            model="gpt-4", 
             messages=[
                 {"role": "system", "content": "You are a helpful AI assistant."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=10,  # 限制输出长度
-            temperature=0.3,  # 控制随机性
-            top_p=0.5  # 核采样
+            max_tokens=10, 
+            temperature=0.3, 
+            top_p=0.5 
         )
 
         # 解析响应
@@ -107,7 +88,6 @@ def get_prediction_call_online_model(prompt, dataset="AG-News"):
         if label !=None:
             return label
     
-    # If all retries fail, return a default value or raise an error
     print(f"Skipping sample after {max_retries} failed attempts.")
     return None  # Or raise an error, adjust based on your needs
 
