@@ -343,7 +343,7 @@ def optimize_adversarial_suffix(
         orig_pred=orig_pred,
         target_label=target_label,
         device=device,
-        max_replacements=5 if dataset_name == "AG-News" else 5,
+        max_replacements=50 if dataset_name == "AG-News" else 50,
         similarity_threshold=similarity_threshold,
         alpha=alpha,
         beta=beta,

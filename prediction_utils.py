@@ -108,9 +108,9 @@ def get_prediction_openrouter(prompt, dataset, model):
         "max_tokens": 256,
         "temperature": 0.7
     }
-    try:
-        max_retries = 3  # Maximum number of retries for invalid responses
-        for attempt in range(max_retries):
+    max_retries = 3  # Maximum number of retries for invalid responses
+    for attempt in range(max_retries):
+        try:
             response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=30)
             response.raise_for_status()  # 抛出 HTTP 错误
             result = response.json()["choices"][0]["message"]["content"]
@@ -118,12 +118,10 @@ def get_prediction_openrouter(prompt, dataset, model):
             label=parse_label_from_response(result,dataset)
             if label !=None:
                 return label
-    except requests.RequestException as e:
-        print(f"API call failed: {e}")
-        raise
-    except ValueError as e:
-        print(f"Failed to parse prediction: {e}")
-        raise
+        except requests.RequestException as e:
+            print(f"API call failed: {e}")
+        except ValueError as e:
+            print(f"Failed to parse prediction: {e}")        
     
     return None
 
