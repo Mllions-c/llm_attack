@@ -155,7 +155,7 @@ for i, (prompt_text, ground_truth_label) in enumerate(dataset_class):
         orig_pred=ground_truth_label,
         target_label=target_label,
         dataset_name=args.dataset_name,
-        suffix_len=20 if args.dataset_name == "AG-News" else 8,
+        suffix_len=20 if args.dataset_name == "AG-News" else 20,
         similarity_threshold=args.similarity_threshold,
         n_steps=n_epochs,
         batch_size=batch_size,
