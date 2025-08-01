@@ -15,24 +15,7 @@ nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger_eng')
 nltk.download('sentiwordnet')
 
-def get_logits_with_embeddings(model, classifier_head, embeddings, max_length: int = 128):
-    outputs = model(inputs_embeds=embeddings, output_hidden_states=True)
-    last_hidden_state = outputs.hidden_states[-1][:, -1, :]
-    logits = classifier_head(last_hidden_state)
-    del outputs, last_hidden_state
-    return logits
-
-def get_prediction_model(model, tokenizer, classifier_head, text: str) -> int:
-    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
-    inputs = {k: v.to(model.device) for k, v in inputs.items()}
-    with torch.no_grad():
-        outputs = model(**inputs, output_hidden_states=True)
-        hidden_states = outputs.hidden_states[-1][:, -1, :]
-        logits = classifier_head(hidden_states)
-        pred = torch.argmax(logits, dim=-1).item()
-    return pred
-
-def attack_for_agnews(
+def optimize(
     bert_model,
     classifier_model,
     classifier_tokenizer,
@@ -218,6 +201,8 @@ def attack_for_agnews(
     adv_text = bert_tokenizer.decode(adv_input_ids[0], skip_special_tokens=True)
     return adv_text
 
+
+
 def compute_perplexity_loss(bert_model, bert_tokenizer, text, device):
     bert_model.eval()
     bert_inputs = bert_tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
@@ -243,6 +228,22 @@ def compute_use_similarity(prompt, optimized_prompt, use_model):
     similarity = torch.nn.functional.cosine_similarity(prompt_embedding, optimized_embedding, dim=0).item()
     return similarity
 
+def get_logits_with_embeddings(model, classifier_head, embeddings, max_length: int = 128):
+    outputs = model(inputs_embeds=embeddings, output_hidden_states=True)
+    last_hidden_state = outputs.hidden_states[-1][:, -1, :]
+    logits = classifier_head(last_hidden_state)
+    del outputs, last_hidden_state
+    return logits
+
+def get_prediction_model(model, tokenizer, classifier_head, text: str) -> int:
+    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
+    inputs = {k: v.to(model.device) for k, v in inputs.items()}
+    with torch.no_grad():
+        outputs = model(**inputs, output_hidden_states=True)
+        hidden_states = outputs.hidden_states[-1][:, -1, :]
+        logits = classifier_head(hidden_states)
+        pred = torch.argmax(logits, dim=-1).item()
+    return pred
 
 def load_emotional_words(bert_tokenizer, dataset_name, threshold=0.75, max_words=100):
    
@@ -312,7 +313,7 @@ def optimize_adversarial_suffix(
             tokenizer.pad_token = default_pad_token
         print(f"Set tokenizer.pad_token to {tokenizer.pad_token}")
 
-    adv_text = attack_for_agnews(
+    adv_text = optimize(
         bert_model=bert_model,
         classifier_model=classifier_model,
         classifier_tokenizer=classifier_tokenizer,
