@@ -3,9 +3,10 @@ import json
 from openai import OpenAI
 import os
 from transformers import AutoTokenizer,AutoModelForCausalLM
-# 模型名称映射字典
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
+
+# configure as needed,if the models on both sides are different, it refers to the transfer function.
 MODEL_NAME_MAPPING = {
     "meta-llama/Meta-Llama-3-8B-Instruct": "meta-llama/llama-3.1-8b-instruct",
     "mistralai/Mistral-7B-Instruct-v0.3": "mistralai/mistral-7b-instruct-v0.3",
@@ -15,13 +16,11 @@ MODEL_NAME_MAPPING = {
 
 def get_prediction_call_model(model, text, dataset="AG-News"):
 
-    # 应用模型名称映射
     mapped_version = MODEL_NAME_MAPPING.get(model, "llama3:8b")
     print(f"mapped_version: {mapped_version} dataset={dataset}")
     
     
     API_base = getattr(model, "API_base", "http://localhost:11434")
-    # 定制化 prompt 设计
     if dataset.lower() == "ag-news":
         prompt = f"Classify the following news text into one of these categories: [0: World, 1: Sports, 2: Business, 3: Sci/Tech]. Return only the number. Text: {text}"
     elif dataset.lower() == "sst2":
@@ -37,7 +36,6 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
     elif mapped_version=="meta-llama/llama-3.1-8b-instruct" or mapped_version =="mistralai/mistral-7b-instruct-v0.3":
         print("call openrouter")
         return get_prediction_openrouter(prompt,dataset,mapped_version)
-    # 设置请求参数
     payload = {
         "model": mapped_version,
         "prompt": prompt,
@@ -49,12 +47,10 @@ def get_prediction_call_model(model, text, dataset="AG-News"):
     headers = {"Content-Type": "application/json"}
     
     try:
-        # 发送请求
         response = requests.post(f"{API_base}/api/generate", json=payload, headers=headers, timeout=30)
         response.raise_for_status()
         data = response.json()
         
-        # 解析响应
         result = data.get("response", data.get("text", ""))
         print(f"API raw Parsed Result: {result}") 
         return parse_label_from_response(result,dataset)
@@ -80,7 +76,6 @@ def get_prediction_call_online_model(prompt, dataset="AG-News"):
             top_p=0.5 
         )
 
-        # 解析响应
         decoded_text = response.choices[0].message.content.strip()
         print(f"Raw output (attempt {attempt+1}): {decoded_text}")
         
@@ -112,7 +107,7 @@ def get_prediction_openrouter(prompt, dataset, model):
     for attempt in range(max_retries):
         try:
             response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=30)
-            response.raise_for_status()  # 抛出 HTTP 错误
+            response.raise_for_status()
             result = response.json()["choices"][0]["message"]["content"]
             print(f"Raw output (attempt {attempt+1}): {result}")
             label=parse_label_from_response(result,dataset)
@@ -131,7 +126,7 @@ def parse_label_from_response(result, dataset):
     digits = "".join(filter(str.isdigit, result))
     if dataset.lower() in ["ag-news", "sst2"]:
         if digits:
-            return int(digits[0])  # 取第一个数字 (0-3)
+            return int(digits[0])
         raise ValueError(f"No valid digit found in response: {result}")
     elif dataset.lower() == "strategyqa":
         return 1 if "true" in result.lower() else 0

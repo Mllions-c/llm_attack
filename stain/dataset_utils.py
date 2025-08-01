@@ -1,9 +1,8 @@
 from datasets import load_dataset
 
 def load_dataset_custom(args):
-    """加载数据集，支持参数化名称和样本数，默认 sst2，留扩展性"""
-    dataset_name = getattr(args, 'dataset_name', 'sst2')  # 默认 sst2
-    num_examples = getattr(args, 'num_examples', 100)     # 默认 100 条
+    dataset_name = getattr(args, 'dataset_name', 'sst2')
+    num_examples = getattr(args, 'num_examples', 10000) 
     
     # 数据集映射，方便扩展
     DATASET_LOCATION = {
